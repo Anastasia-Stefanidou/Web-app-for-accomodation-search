@@ -55,6 +55,10 @@ footer {
     border-radius: 2px;
 }
 
+.current_page a {
+    color: #fff;
+}
+
 
 @media screen and (max-width: 600px) {
     .navbar ul {

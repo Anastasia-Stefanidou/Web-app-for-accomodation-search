@@ -36,9 +36,9 @@ $allTypes = $type->getAllTypes();
                   <li class="navbar-logo">TravelBug</li>
                   <li class="navbar-toggle"><i class="fas fa-bars"></i></li>
                   <li class="navbar-links current_page"><a href="#">Home</a></li>
-                  <li class="navbar-links"><a href="#" target="_blank">Profile</a></li>
-                  <li class="navbar-links"><a href="#">Register</a></li>
-                  <li class="navbar-links"><a href="#">Log In</a></li>
+                  <li class="navbar-links"><a href="profile.php" target="_blank">Profile</a></li>
+                  <li class="navbar-links"><a href="register.php">Register</a></li>
+                  <li class="navbar-links"><a href="login.php">Log In</a></li>
               </ul>
           </nav>
       </header>

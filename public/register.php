@@ -38,10 +38,10 @@ use Hotel\User;
             <ul>
                 <li class="navbar-logo">TravelBug</li>
                 <li class="navbar-toggle"><i class="fas fa-bars"></i></li>
-                <li class="navbar-links"><a href="#">Home</a></li>
+                <li class="navbar-links"><a href="index.php">Home</a></li>
                 <li class="navbar-links"><a href="profile.php" target="_blank">Profile</a></li>
                 <li class="navbar-links current_page"><a href="#">Register</a></li>
-                <li class="navbar-links"><a href="#">Log in</a></li>
+                <li class="navbar-links"><a href="login.php">Log in</a></li>
             </ul>
         </nav>
     </header>

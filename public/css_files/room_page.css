@@ -1,0 +1,90 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.title {
+    display: flex;
+    background-color: rgb(240, 102, 48);
+    color: #fff;
+    width: 60%;
+    padding: 5px;
+}
+
+.title h1, .title h2 {
+    font-size: 16px;
+    font-weight: 200;
+}
+
+.room_info {
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+    margin-top: 20px;
+}
+
+.room_info p {
+    font-size: 12px;
+}
+
+.amenities {
+    display: flex;
+    background-color: rgb(240, 102, 48);
+    justify-content: space-around;
+    color: #fff;
+    margin-top: 2px;
+    border-radius: 2px;
+}
+
+.btn {
+    display: flex;
+    justify-content: end;
+    margin: 10px 0;
+}
+
+.btn1 , .btn2 {
+    padding: 5px;
+    background-color: rgb(240, 102, 48);
+    cursor: pointer;
+    color: #fff;
+    border: none;
+    border-radius: 2px;
+    margin: 4px;
+}
+
+.btn2 {
+    background-color: #f30909eb;
+}
+
+.map {
+    width: 60%;
+}
+
+@media screen and (max-width: 800px) {
+    .title {
+        flex-wrap: wrap;
+    }
+
+    .amenities {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .amenities p {
+        border-bottom: 2px dotted #fff;
+        width: 100%;
+        text-align: center;
+    }
+}
+

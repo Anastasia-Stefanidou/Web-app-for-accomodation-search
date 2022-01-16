@@ -53,6 +53,12 @@ $allAvailableRooms = $room->search(new DateTime($checkInDate),new DateTime($chec
       rel="stylesheet"
       href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css"
     />
+   <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.13.0/css/all.css"
+      integrity="sha384-Bfad6CLCknfcloXFOyFnlgtENryhrpZCe29RTifKEixXQZ38WheV+i/6YWSzkz3V"
+      crossorigin="anonymous"
+    />
 </head>
 <body>
     <header>
@@ -60,15 +66,15 @@ $allAvailableRooms = $room->search(new DateTime($checkInDate),new DateTime($chec
             <ul>
                 <li class="navbar-logo">TravelBug</li>
                 <li class="navbar-toggle"><i class="fas fa-bars"></i></li>
-                <li class="navbar-links"><a href="#">Home</a></li>
-                <li class="navbar-links"><a href="#" target="_blank">Profile</a></li>
-                <li class="navbar-links"><a href="#">Register</a></li>
-                <li class="navbar-links"><a href="#">Log In</a></li>
+                <li class="navbar-links"><a href="index.php">Home</a></li>
+                <li class="navbar-links"><a href="profile.php" target="_blank">Profile</a></li>
+                <li class="navbar-links"><a href="register.php">Register</a></li>
+                <li class="navbar-links"><a href="login.php">Log In</a></li>
             </ul>
         </nav>
     </header>
   <main>
-    <form class= "item item1 container1" name = "searchForm" action="list.php" method="GET" onsubmit="return validateForm()">
+    <form class= "item item1 container1" name = "searchForm" action="list.php" method="GET">
         <p>find the perfect hotel</p>
         <select id="count_of_guests" name="count_of_guests" class="cont_item1 cont_item" data-placeholder="Count of Guests">
             <option value="" disabled selected hidden>Count of Guests</option>
@@ -132,10 +138,30 @@ $allAvailableRooms = $room->search(new DateTime($checkInDate),new DateTime($chec
         <?php
             }
         ?>
+        <section class="no_rooms">
+            <?php
+                if(count($allAvailableRooms) == 0) {
+            ?>
+                <div id="error-box">
+                    <div class="dot"></div>
+                    <div class="dot two"></div>
+                    <div class="face2">
+                    <div class="eye"></div>
+                    <div class="eye right"></div>
+                    <div class="mouth sad"></div>
+               </div>
+               <div class="shadow move"></div>
+               <div class="message"><h1 class="alert">Sorry,</h1><p>there are no rooms.</div>
+              <button class="button-box"><a class="red" href="index.php" target="_blank">try something else</a></button>
+            <?php
+                }
+            ?>
+        </section>
     </div>
   </main>
   <footer>
         <p> &copy; ΔΙΠΑΕ 2021</p>
+        <a href="https://codepen.io/juliepark"></a>
   </footer>
   <script src="js_files/responsive_navbar.js"></script>
   <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
