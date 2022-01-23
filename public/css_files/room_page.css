@@ -18,6 +18,8 @@
     color: #fff;
     width: 60%;
     padding: 5px;
+    justify-content: space-around;
+    align-items: center;
 }
 
 .title h1, .title h2 {
@@ -32,6 +34,10 @@
     margin-top: 20px;
 }
 
+.room_info img {
+    width: 80%;
+}
+
 .room_info p {
     font-size: 12px;
 }
@@ -43,6 +49,10 @@
     color: #fff;
     margin-top: 2px;
     border-radius: 2px;
+}
+
+.amenities p {
+    text-align: center;
 }
 
 .btn {
@@ -69,6 +79,18 @@
     width: 60%;
 }
 
+.checked {
+    color: yellow;
+}
+
+.fav .selected {
+    list-style-type: none;
+}
+
+.selected {
+    color: rgb(71, 14, 14);
+}
+
 @media screen and (max-width: 800px) {
     .title {
         flex-wrap: wrap;
@@ -85,6 +107,10 @@
         border-bottom: 2px dotted #fff;
         width: 100%;
         text-align: center;
+    }
+
+    .room_info img {
+        width: 100%;
     }
 }
 

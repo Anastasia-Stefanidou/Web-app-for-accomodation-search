@@ -40,7 +40,7 @@ class Room extends BaseService
         return $cities;
     }
 
-    public function search($checkInDate, $checkOutDate, $selectedCity = '', $selectedTypeId = '')
+    public function search($checkInDate, $checkOutDate, $selectedCity = '', $selectedTypeId = '', $selectedGuest = '')
      {
         //Setup parameters
         $parameters = [
@@ -54,6 +54,9 @@ class Room extends BaseService
         if (!empty($selectedTypeId)) {
             $parameters[':type_id'] = $selectedTypeId;
         }
+        if (!empty($selectedGuest)) {
+            $parameters[':count_of_guests'] = $selectedGuest;
+        }
 
         //Build query
         $sql = 'SELECT * FROM room WHERE ';
@@ -64,6 +67,9 @@ class Room extends BaseService
 
         if (!empty($selectedTypeId)) {
             $sql .= 'type_id = :type_id AND ';
+        }
+        if (!empty($selectedGuest)) {
+            $sql .= 'count_of_guests = :count_of_guests AND ';
         }
 
         $sql .= 'room_id NOT IN (
@@ -78,5 +84,6 @@ class Room extends BaseService
 
         return $this->fetchAll($sql, $parameters);
     }
+
 }
 

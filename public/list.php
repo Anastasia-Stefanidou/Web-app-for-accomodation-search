@@ -20,15 +20,15 @@ $cities = $room->getCities();
 $allTypes = $type->getAllTypes();
 $allGuests = $guest->getAllGuests();
 
-// print_r($_REQUEST);die;
 $selectedCity = $_REQUEST['city'];
 $selectedGuest = $_REQUEST['count_of_guests'];
 $selectedTypeId = $_REQUEST['room_type'];
 $checkInDate = $_REQUEST['check_in_date'];
 $checkOutDate = $_REQUEST['check_out_date'];
-$roomId = $_REQUEST['room_id'];
+// $roomId = $_REQUEST['room_id'];
+// print_r();die;
 
-$allAvailableRooms = $room->search(new DateTime($checkInDate),new DateTime($checkOutDate), $selectedCity, $selectedTypeId);
+$allAvailableRooms = $room->search(new DateTime($checkInDate),new DateTime($checkOutDate), $selectedCity, $selectedTypeId, $selectedGuest);
 // print_r($allAvailableRooms);die;
 
 // $roomInfo = $room->get($roomId);
@@ -59,6 +59,11 @@ $allAvailableRooms = $room->search(new DateTime($checkInDate),new DateTime($chec
       integrity="sha384-Bfad6CLCknfcloXFOyFnlgtENryhrpZCe29RTifKEixXQZ38WheV+i/6YWSzkz3V"
       crossorigin="anonymous"
     />
+    <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </head>
 <body>
     <header>
@@ -74,14 +79,14 @@ $allAvailableRooms = $room->search(new DateTime($checkInDate),new DateTime($chec
         </nav>
     </header>
   <main>
-    <form class= "item item1 container1" name = "searchForm" action="list.php" method="GET">
+    <form class= "item item1 container1 searchForm" name = "searchForm" action="list.php" method="get">
         <p>find the perfect hotel</p>
         <select id="count_of_guests" name="count_of_guests" class="cont_item1 cont_item" data-placeholder="Count of Guests">
             <option value="" disabled selected hidden>Count of Guests</option>
             <?php
                 foreach ($allGuests as $guest) {
               ?>
-                <option value="<?php echo $guest; ?>"><?php echo $guest;?></option>
+               <option value="<?php echo $guest; ?>"><?php echo $guest;?></option>
             <?php
               }
             ?>
@@ -91,8 +96,7 @@ $allAvailableRooms = $room->search(new DateTime($checkInDate),new DateTime($chec
             <?php
                 foreach ($allTypes as $roomType) {
               ?>
-              <option <?php echo $selectedTypeId == $roomType['type_id'] ? 'selected="selected"' : ''; ?>value="
-              <?php echo $roomType['title']; ?>"><?php echo $roomType['title']; ?></option>
+                <option value="<?php echo $roomType['type_id']; ?>"><?php echo $roomType['title'];?></option>
             <?php
               }
             ?>
@@ -102,15 +106,14 @@ $allAvailableRooms = $room->search(new DateTime($checkInDate),new DateTime($chec
               <?php
                   foreach ($cities as $city) {
               ?>
-                  <option <?php echo $selectedCity == $city ? 'selected="selected"' : ''; ?> value="
-                  <?php echo $city; ?>"><?php echo $city; ?></option>
+                    <option value="<?php echo $city; ?>"><?php echo $city;?></option>
               <?php
                 }
               ?>
         </select>
         <input type="date"  name="check_in_date" id="from" value="<?php echo $checkInDate; ?>" placeholder="Check-in Date" class="cont_item4 cont_item">
         <input type="date" name="check_out_date" id="to" value="<?php echo $checkOutDate; ?>" placeholder="Check-out Date" class="cont_item5 cont_item">
-        <input class="cont_item6 cont_item btn" id="submitButton" name="submit" type="submit" value="FIND HOTEL"/>
+        <input class="cont_item6 cont_item btn" id="submitButton" name="submit" type="submit" value="FIND HOTELS"/>    
     </form>
     <div class= "item item2 container2">
         <h2 class="title">Search Results</h2>
@@ -131,7 +134,9 @@ $allAvailableRooms = $room->search(new DateTime($checkInDate),new DateTime($chec
                     <div class="extra">
                         <span class= "extra_item" >Count of Guests: <?php echo $availableRoom['count_of_guests']; ?></span>
                         <span class= "extra_item">Type of Room: <?php echo $availableRoom['type_id']; ?></span>
-                        <button class="room-page"><a href="room.php" target="_blank">Go to Room Page</a></button>
+                        <form name="listForm" method="post" action="room.php">
+                            <button class="room-page"><a href="room.php?room_id=<?php echo $availableRoom['room_id']; ?>&check_in_date=<?php echo $checkInDate; ?>&check_out_date=<?php echo $checkOutDate; ?>" target="_blank">Go to Room Page</a></button>
+                        </form>
                     </div>
             </div>
         </div>
@@ -163,6 +168,7 @@ $allAvailableRooms = $room->search(new DateTime($checkInDate),new DateTime($chec
         <p> &copy; ΔΙΠΑΕ 2021</p>
         <a href="https://codepen.io/juliepark"></a>
   </footer>
+  <!-- <script src="js_files/search.js"></script> -->
   <script src="js_files/responsive_navbar.js"></script>
   <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>

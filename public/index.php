@@ -13,6 +13,8 @@ $type = new RoomType();
 $allTypes = $type->getAllTypes();
 // print_r($allTypes);die;
 
+$allAvailableRooms = $room->search(new DateTime($checkInDate),new DateTime($checkOutDate), $selectedCity, $selectedTypeId);
+
 ?>
 
 <!DOCTYPE>
