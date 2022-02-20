@@ -49,21 +49,12 @@ $allAvailableRooms = $room->search(new DateTime($checkInDate),new DateTime($chec
   <title>Search Page</title>
   <link rel="stylesheet" href="css_files/basic_styles.css">
   <link rel="stylesheet" href="css_files/list.css">
-  <link
-      rel="stylesheet"
-      href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css"
-    />
    <link
       rel="stylesheet"
       href="https://use.fontawesome.com/releases/v5.13.0/css/all.css"
       integrity="sha384-Bfad6CLCknfcloXFOyFnlgtENryhrpZCe29RTifKEixXQZ38WheV+i/6YWSzkz3V"
       crossorigin="anonymous"
     />
-    <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </head>
 <body>
     <header>
@@ -86,7 +77,7 @@ $allAvailableRooms = $room->search(new DateTime($checkInDate),new DateTime($chec
             <?php
                 foreach ($allGuests as $guest) {
               ?>
-               <option value="<?php echo $guest; ?>"><?php echo $guest;?></option>
+               <option <?php echo $selectedGuest == $guest ? 'selected' : ''; ?> value= "<?php echo $guest; ?>"><?php echo $guest;?></option>
             <?php
               }
             ?>
@@ -96,7 +87,7 @@ $allAvailableRooms = $room->search(new DateTime($checkInDate),new DateTime($chec
             <?php
                 foreach ($allTypes as $roomType) {
               ?>
-                <option value="<?php echo $roomType['type_id']; ?>"><?php echo $roomType['title'];?></option>
+                <option <?php echo $selectedTypeId == $roomType['type_id'] ? 'selected' : ''; ?> value="<?php echo $roomType['type_id']; ?>"><?php echo $roomType['title'];?></option>
             <?php
               }
             ?>
@@ -106,7 +97,7 @@ $allAvailableRooms = $room->search(new DateTime($checkInDate),new DateTime($chec
               <?php
                   foreach ($cities as $city) {
               ?>
-                    <option value="<?php echo $city; ?>"><?php echo $city;?></option>
+                    <option <?php echo $selectedCity == $city ? 'selected' : ''; ?> value="<?php echo $city; ?>"><?php echo $city;?></option>
               <?php
                 }
               ?>
@@ -166,11 +157,11 @@ $allAvailableRooms = $room->search(new DateTime($checkInDate),new DateTime($chec
   </main>
   <footer>
         <p> &copy; ΔΙΠΑΕ 2021</p>
-        <a href="https://codepen.io/juliepark"></a>
   </footer>
   <!-- <script src="js_files/search.js"></script> -->
+  <a href="https://codepen.io/juliepark"></a>
   <script src="js_files/responsive_navbar.js"></script>
-  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <!-- <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
 </body>
 </html>

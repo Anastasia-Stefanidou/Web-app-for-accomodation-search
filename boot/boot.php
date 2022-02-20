@@ -6,7 +6,7 @@ spl_autoload_register(function ($class) {
     $class = str_replace("\\", "/", $class);
     // var_dump(sprintf('app/%s.php', $class));
     require_once sprintf(__DIR__.'/../app/%s.php', $class);
-
+    // require_once(__DIR__ . sprintf('/app/%s.php', $class));
 });
 
 use Hotel\User;
@@ -26,3 +26,4 @@ if(isset($_COOKIE['user_token']))
         }
     }
 };
+

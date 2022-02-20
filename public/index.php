@@ -28,6 +28,12 @@ $allAvailableRooms = $room->search(new DateTime($checkInDate),new DateTime($chec
       rel="stylesheet"
       href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css"
     />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.13.0/css/all.css"
+      integrity="sha384-Bfad6CLCknfcloXFOyFnlgtENryhrpZCe29RTifKEixXQZ38WheV+i/6YWSzkz3V"
+      crossorigin="anonymous"
+    />
     <link rel="stylesheet" href="css_files/basic_styles.css">
     <link rel="stylesheet" href="css_files/index.css">
   </head>

@@ -12,11 +12,18 @@
     align-items: center;
 }
 
+.top_header {
+    display: flex;
+    width: 75%;
+    justify-content: center;
+}
+
 .title {
+    width: 70%;
     display: flex;
     background-color: rgb(240, 102, 48);
     color: #fff;
-    width: 60%;
+    margin-right: 50px;
     padding: 5px;
     justify-content: space-around;
     align-items: center;
@@ -43,6 +50,7 @@
 }
 
 .amenities {
+    width: 60%;
     display: flex;
     background-color: rgb(240, 102, 48);
     justify-content: space-around;
@@ -62,17 +70,27 @@
 }
 
 .btn1 , .btn2 {
-    padding: 5px;
+    padding: 10px;
     background-color: rgb(240, 102, 48);
-    cursor: pointer;
     color: #fff;
     border: none;
     border-radius: 2px;
     margin: 4px;
 }
 
-.btn2 {
+.btn1 {
     background-color: #f30909eb;
+    width: 140px;
+    cursor: pointer;
+}
+
+.btn2 {
+    background-color: rgb(76 175 80);
+}
+
+.btn2 a {
+    text-decoration: none;
+    color: #fff;
 }
 
 .map {
@@ -83,13 +101,66 @@
     color: yellow;
 }
 
-.fav .selected {
+.fav {
     list-style-type: none;
+    cursor: pointer;
+    font-size: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.fav p {
+    font-size: 14px;
+    text-decoration: underline;
+}
+
+#favoriteForm {
+    width: 8%;
+}
+
+#favoriteForm:hover {
+    border: 1px solid #F0F0F0;
+    border-radius: 2px;
+    background-color: #F0F0F0;
 }
 
 .selected {
-    color: rgb(71, 14, 14);
+    color: #d65076;
 }
+
+.reviewForm {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    width: 720px;
+}
+
+.reviewForm fieldset,
+.reviewForm textarea {
+    padding: 5px;
+    margin: 5px 0 10px 0;
+}
+
+.reviewForm button {
+    align-self: center;
+    padding: 5px;
+    cursor: pointer;
+    margin: 5px 0 5px 0;
+    background-color: rgb(240, 102, 48);
+    color: #fff;
+    border: none;
+    border-radius: 2px;
+}
+
+.insert_review {
+    width: 30%;
+}
+
+.room_info {
+    width: 60%;
+}
+
 
 @media screen and (max-width: 800px) {
     .title {
@@ -114,3 +185,39 @@
     }
 }
 
+.reviews {
+    width: 75%;
+    margin-top: 15px;
+    border: 1px solid #fff;
+    border-radius: 2px;
+    background-color: #8a89890f;
+}
+
+.reviews h1 {
+    font-size: 20px;
+    font-weight: 100;
+    text-align: center;
+}
+
+.room_reviews {
+    display: flex;
+    margin-bottom: 10px;
+    border-bottom: 1px dotted gray;
+}
+
+.content_left {
+    width: 30%;
+}
+
+.content_left span {
+    text-transform: capitalize;
+}
+
+.content_right {
+    width: 70%;
+}
+
+.content_right h5 {
+    display: inline-block;
+    padding-right: 20px;
+}

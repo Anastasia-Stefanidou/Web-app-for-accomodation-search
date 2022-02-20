@@ -55,6 +55,7 @@ class BaseService
           $statement = $this->getPdo()->prepare($sql);
 
           $status = $statement->execute($parameters);
+         
             if (!$status) {
                 throw new Exception($statement->errorInfo()[2]);
             }
