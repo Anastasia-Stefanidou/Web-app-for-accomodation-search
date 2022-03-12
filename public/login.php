@@ -56,3 +56,4 @@
      <script src="js_files/responsive_navbar.js"></script>
 </body>
 </html>
+<?php

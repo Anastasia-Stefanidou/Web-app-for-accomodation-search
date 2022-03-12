@@ -4,7 +4,7 @@ use Hotel\User;
 use Hotel\Review;
 
 //Boot application
-require_once __DIR__ . '/../../boot/boot.php';
+require_once __DIR__ .'/../../boot/boot.php';
 
 
 //Return to home page if not a post request
@@ -28,7 +28,7 @@ $review = new Review();
 $review->addReview($roomId, User::getCurrentUserId(), $_REQUEST['rate'], $_REQUEST['comment']);
 
 //Get all reviews
-$roomReviews = $review->getReviewByRoom($roomId);
+$roomReviews = $review->getReviewsByRoom($roomId);
 
 //Load user
 $user = new User();
@@ -37,20 +37,24 @@ $userInfo = $user->getByUserId(User::getCurrentUserId());
 ?>
 
 <div class="room_reviews">
-    <p><?php echo $userInfo['user_name']; ?></p>
-    <?php 
-        for ($i=1; $i <= 5; $i++) { 
-            if ($_REQUEST['rate'] >= $i) {
-    ?>
-            <span class="fa fa-star checked"></span>
-    <?php
-        } else {
-    ?>
-            <span class="fa fa-star"></span>
-    <?php
-            }           
-        }
-    ?>
-    <h5><?php echo (new DateTime())->format('Y-m-d H:i:s'); ?></h5>
-    <p><?php echo $_REQUEST['comment']; ?></p>
+    <div class="content_left">
+        <span><?php echo $userInfo['name']; ?></span>
+    </div>
+    <div class="content_right">
+        <h5><?php echo (new DateTime())->format('Y-m-d H:i:s'); ?></h5>
+        <?php 
+            for ($i=1; $i <= 5; $i++) { 
+                if ($_REQUEST['rate'] >= $i) {
+        ?>
+                <span class="fa fa-star checked"></span>
+        <?php
+            } else {
+        ?>
+                <span class="fa fa-star"></span>
+        <?php
+                }           
+            }
+        ?>
+        <p><?php echo $_REQUEST['comment']; ?></p>
+    </div>
 </div>

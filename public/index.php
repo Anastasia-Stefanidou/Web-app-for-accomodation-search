@@ -4,17 +4,19 @@ require __DIR__.'/../boot/boot.php';
 
 use Hotel\Room;
 use Hotel\RoomType;
+use Hotel\User;
+
+$user = new User();
 
 $room = new Room();
 $cities = $room->getCities();
-// print_r($cities);die;
 
 $type = new RoomType();
 $allTypes = $type->getAllTypes();
-// print_r($allTypes);die;
 
 $allAvailableRooms = $room->search(new DateTime($checkInDate),new DateTime($checkOutDate), $selectedCity, $selectedTypeId);
-
+$userId = User::getCurrentUserId();
+print_r($userId);
 ?>
 
 <!DOCTYPE>
@@ -46,7 +48,16 @@ $allAvailableRooms = $room->search(new DateTime($checkInDate),new DateTime($chec
                   <li class="navbar-links current_page"><a href="#">Home</a></li>
                   <li class="navbar-links"><a href="profile.php" target="_blank">Profile</a></li>
                   <li class="navbar-links"><a href="register.php">Register</a></li>
-                  <li class="navbar-links"><a href="login.php">Log In</a></li>
+                  <?php if($_SESSION['user_id']) {
+                  ?>
+                      <li class="navbar-links"><a href="actions/logout.php">Log Out</a></li>
+                  <?php
+                      } else {
+                  ?>
+                      <li class="navbar-links"><a href="login.php">Log In</a></li>
+                  <?php
+                      }
+                  ?>
               </ul>
           </nav>
       </header>

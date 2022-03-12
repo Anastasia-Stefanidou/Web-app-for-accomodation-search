@@ -7,158 +7,171 @@ use Hotel\Review;
 use Hotel\Booking;
 use Hotel\User;
 
-//Checked for logged in user
-// if (empty(User::getCurrentUserId())) {
-//   header('Location: index.php');
+$userId = User::getCurrentUserId();
+print_r($userId);
+if (empty($userId)) {
+  header('Location: index.php');
+  return;
+}
 
-//   return;
-// }
+//Get user favorites
+$favorite = new Favorite();
+$userFavorites = $favorite->getByUser($userId);
 
-// $favorite = new Favorite();
-// $userFavorites = $favorite->getListByUser($userId);
+//Get user reviews
+$review = new Review();
+$userReviews = $review->getByUser($userId);
 
-// $review = new Review();
-// $userReviews = $review->getListByUser($userId);
-// print_r($userReviews);die;
+//Get user bookings
+$booking = new Booking();
+$userBookings = $booking->getByUser($userId);
 
 ?>
 <!DOCTYPE>
 <html>
-<head>
+  <head>
     <meta name="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="noindex,nofollow">
-    <title>Profile-page</title>
-</head>
-<body>
+    <link rel="stylesheet" href= "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="css_files/basic_styles.css" />
+    <link rel="stylesheet" href="css_files/profile-page.css" />
+    <title>Profile Page</title>
+  </head>
+  <body>
     <header>
-        <div class="box-shadow">
-            <span class="main-logo">Hotels</span>
-          <div class="primary-menu text-right">
-              <ul>
-                    <li id="divleft">
-                        <a href="profile.html" target="_blank">
-                          <i class="fas fa-user"></i>
-                          Profile
-                      </a>
-                    </li>
-                    <li id="divright">
-                        <a href="project.html" target="_blank">
-                          <i class="fas fa-home"></i>
-                          Home
-                        </a>
-                    </li>
-              </ul>
-          </div>
-        </div>
+      <nav class="navbar">
+          <ul>
+              <li class="navbar-logo">TravelBug</li>
+              <li class="navbar-toggle"><i class="fas fa-bars"></i></li>
+              <li class="navbar-links"><a href="index.php">Home</a></li>
+              <li class="navbar-links current_page"><a href="profile.php" target="_blank">Profile</a></li>
+              <li class="navbar-links"><a href="register.php">Register</a></li>
+              <li class="navbar-links"><a href="actions/logout.php">Log Out</a></li>
+              <li class="navbar-links"><a href="login.php">Log In</a></li>
+          </ul>
+      </nav>
     </header>
-    <main class="main-content">
-              <div class="container">
-                <section class="favorites">
-                    <p>FAVORITES</p>
-                    <!-- <?php
-                        if (count($userFavorites) > 0) {
-                    ?> -->
-                    <ol>
-                      <!-- <?php
-                          foreach ($userFavorites as $favorite) {
-                      ?> -->
-                      <h3>
-                        <li>
-                          <h3>
-                              <a href="/room.php?room_id=<?php echo $favorite['room_id']; ?>"><?php echo $favorite['name']; ?></a>
-                          </h3>
-                        </li>
-                      </h3>
-                      <?php
-                          }
-                      ?>
-                    </ol>
-                    <?php
-                        } else {
-                    ?>
-                        <h4>You don't have any favorite Hotel!</h4>
-                    <?php
-                        }
-                    ?>
-                 </section>
-                  <section class="reviews">
-                    <p class="last-paragraph">REVIEWS</p>
-                    <ol>
-                        <li>Hilton Hotel</li>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <li>Grande Bretagne Hotel</li>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </ol>
-                </section>
-              <section class="hotel-list inline-block align-top">
-                      <header class="page-title">
-                          <h2>My Bookings</h2>
-                      </header>
-                      <article class="hotel">
-                        <aside class="media">
-                           <img src="/../extra/images/room-2.jpg" alt="Welcome to our site" width="100%" height="auto">
-                            <!-- <div class="pricebutton"> -->
-                                <button class="price">Total Cost: 500 &euro; </button>
-                            <!-- </div> -->
-                       </aside>
-                        <main class="info">
-                          <div class="border-line">
-                               <h2>GRANDE BRETAGNE HOTEL</h2>
-                               <h3><i class="fas fa-map-marker-alt"></i>
-                                 ATHENS, SYNTAGMA</h3>
-                               <p>The grand hotel grand Bretagne is a historic luxury hotel in the heart of Athens</p>
-                          </div>
-                               <div class="buttonright">
-                                 <button class="room-page"><a href="rooms-page.html" target="_blank">Go to Room Page</a></button>
-                               </div>
-                               <div class="box smallbox">
-                                   <span class="grayboxleft">Check-in Date: 2018-04-27 </span>
-                                   <span class="grayboxmiddle">Check-out Date: 2018-04-30</span>
-                                   <span class="grayboxright">Type of Room: Double Room</span>
-                              </div>
-                         </main>
-                        <div class="clear"></div>
-                      </article>
-                      <article class="hotel">
-                        <aside class="media">
-                           <img src="/../extra/images/room-1.jpg" alt="Welcome to our site" width="100%" height="auto">
-                             <!-- <div class="box"> -->
-                                <button class="price">Total Cost: 350 &euro; </button>
-                             <!-- </div> -->
-                       </aside>
-                        <main class="info">
-                          <div class="border-line">
-                                 <h2>HILTON HOTEL</h2>
-                                 <h3><i class="fas fa-map-marker-alt"></i>
-                                   ATHENS, ZWGRAFOU</h3>
-                                 <p>Private balconies with Acropolis and city views provide a stunning backdrop and natural light.</p>
-                          </div>
-                               <div class="buttonright">
-                                 <button class="room-page"><a href="rooms-page.html" target="_blank">Go to Room Page</a></button>
-                               </div>
-                               <div class="box smallbox">
-                                 <span class="grayboxleft">Check-in Date: 2018-06-20 </span>
-                                 <span class="grayboxmiddle">Check-out Date: 2018-09-25</span>
-                                 <span class="grayboxright">Type of Room: Single Room</span>
-                              </div>
-                         </main>
-                         <div class="clear"></div>
-                      </article>
-                   </section>
+    <main>
+      <div class= "left">
+        <div class="favorites">
+          <h1>Favorites</h1>
+          <?php
+            if (count($userFavorites) > 0) {
+          ?>
+            <ul class="fav">
+              <?php
+                foreach ($userFavorites as $counter => $favorite) {
+              ?>
+              <li>
+                <h3 class="user_fav">
+                  <a href="room.php?room_id=<?php echo $favorite['room_id']; ?>" target="_blank"><?php echo sprintf ('%d. %s', $counter + 1, $favorite['name']); ?></a>
+                </h3>
+              </li>
+              <?php
+                }
+              ?>
+            </ul>
+          <?php 
+            } else {
+          ?>
+            <h2>You don't have any favorite Hotel.</h2>
+          <?php 
+            }
+          ?>
+        </div>
+        <div class="reviews">
+          <h1>Reviews</h1>
+          <?php
+            if (count($userReviews) > 0) {
+          ?>
+            <ul>
+              <?php
+                foreach ($userReviews as $counter => $review) {
+              ?>
+              <li>
+                <h3 class="inner_container">
+                  <a href="room.php?room_id=<?php echo $review['room_id']; ?>" target="_blank"><?php echo sprintf ('%d. %s', $counter + 1, $review['name']); ?></a>
+                  <div class="stars">
+                    <?php 
+                        for ($i=1; $i <=5; $i++) {
+                          if ($review['rate'] >= $i) {
+                          ?>
+                          <span class="fa fa-star checked"></span>
+                          <?php
+                      } else { 
+                          ?>
+                          <span class="fa fa-star"></span>
+                          <?php
+                      }
+                    }
+                    ?>  
+                  </div>
+                  <div class= "comment">
+                    <h3><?php echo $review['comment'] ?></h3>
+                  </div>
+                </h3>
+              </li>
+              <?php
+                }
+              ?>
+            </ul>
+          <?php 
+            } else {
+          ?>
+            <h2>You don't have any reviews.</h2>
+          <?php 
+            }
+          ?>
+        </div>
+      </div>
+      <div class= "right">
+        <div class="title">
+          <h1>Hello <?php echo $_SESSION['name']; ?> , your bookings</h1>
+        </div>
+          <?php
+            if (count($userBookings) > 0) {
+          ?>
+            <ul>
+              <?php
+                foreach ($userBookings as $booking) {
+              ?>
+              <li>
+                <h3 class = "bookings">
+                  <div class="img">
+                    <img src="/../extra/images/<?php echo $booking['photo_url']; ?>">
+                  </div>
+                  <div class="right_side">
+                    <div class="main">
+                      <h1><?php echo $booking['name'] ?></h1>
+                      <p><?php echo $booking['city'] ?> , <?php echo $booking['area'] ?></p>
+                      <p><?php echo $booking['description_short'] ?></p>
+                    </div>
+                    <div class="extra">
+                      <p class="price">Price: <?php echo $booking['total_price'] ?> €</p>
+                      <p class="check_in_date">Check in: <?php echo $booking['check_in_date'] ?></p>
+                      <p class="check_out_date">Check out: <?php echo $booking['check_out_date'] ?></p>
+                    </div>
+                    <a href="room.php?room_id=<?php echo $booking['room_id']; ?>" target="_blank">Go to room page</a>
                 </div>
+                </h3>
+                </li>
+                <?php
+                  }
+                ?>
+              </ul>
+            <?php 
+              } else {
+            ?>
+              <h2>You don't have any bookings.</h2>
+            <?php 
+              }
+            ?>
+      </div>
     </main>
-    <footer>
+    <footer class="margin-top">
         <p> &copy; ΔΙΠΑΕ 2021</p>
     </footer>
-  <link href="css_files/profile-page.css" type="text/css" rel="stylesheet" />
-</body>
+  <script src="js_files/responsive_navbar.js"></script>
+  </body>
 </html>

@@ -5,8 +5,17 @@ namespace Hotel;
 use Hotel\BaseService;
 
 
-class Favorite extends BaseService 
-{
+class Favorite extends BaseService {
+    public function getByUser($userId) {
+        $parameters = [
+            ':user_id' => $userId,
+        ];
+        return $this->fetchAll('SELECT favorite.*, room.name
+        FROM favorite
+        INNER JOIN room ON favorite.room_id = room.room_id
+        WHERE user_id = :user_id', $parameters);
+    }
+
     public function isFavorite($roomId, $userId) {
         $parameters = [
             ':room_id' => $roomId,
@@ -23,7 +32,7 @@ class Favorite extends BaseService
                ':user_id' => $userId,
            ];
            
-           return $this->execute('INSERT INTO favorite (room_id, user_id) VALUES 
+           return $this->execute('INSERT IGNORE INTO favorite (room_id, user_id) VALUES 
            (:room_id, :user_id)', $parameters);
        }
 

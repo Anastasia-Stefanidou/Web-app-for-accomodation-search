@@ -12,21 +12,24 @@ class User extends BaseService
 
     private static $currentUserId;
 
-      public function getByEmail($email)
-    {
+    public function getByEmail($email) {
         $parameters = [
             ':email' => $email,
         ];
         return $this->fetch('SELECT * FROM USER WHERE email = :email', $parameters);
     }
 
-
-    public function getList()
-    {
-         return $this->fetchAll('SELECT * FROM user');
+    public function getByUserId($userId) {
+        $parameters = [
+        ':user_id' => $userId,
+        ];
+        return $this->fetch('SELECT * FROM user WHERE user_id = :user_id', $parameters);
     }
-    public function insert($name, $email, $password)
-     {
+
+    public function getList() {
+        return $this->fetchAll('SELECT * FROM user');
+    }
+    public function insert($name, $email, $password) {
         $passwordHash = password_hash($password, PASSWORD_BCRYPT);
 
         $parameters = [
@@ -41,8 +44,7 @@ class User extends BaseService
          return $rows == 1;
     }
 
-    public function verify($email, $password)
-    {
+    public function verify($email, $password) {
         // Step 1 - Retrieve user
         $user = $this->getByEmail($email);
 
@@ -50,27 +52,24 @@ class User extends BaseService
         return password_verify($password, $user['password']);
     }
 
-    public function generateToken($userId) 
-        {
-            $payload = [
-                'user_id' => $userId,
-            ];
-            $payloadEncoded = base64_encode(json_encode($payload));
-            $signature = hash_hmac('sha256', $payloadEncoded, self::TOKEN_KEY);
+    public function generateToken($userId) {
+        $payload = [
+            'user_id' => $userId,
+        ];
+        $payloadEncoded = base64_encode(json_encode($payload));
+        $signature = hash_hmac('sha256', $payloadEncoded, self::TOKEN_KEY);
 
-            return sprintf('%s.%s', $payloadEncoded, $signature);
-        }
+        return sprintf('%s.%s', $payloadEncoded, $signature);
+    }
 
 
-    public function getTokenPayload($token)
-    {
+    public function getTokenPayload($token) {
         [$payloadEncoded] = explode('.', $token);
 
         return json_decode(base64_decode($payloadEncoded), true);
     }
 
-    public function verifyToken($token)
-    {
+    public function verifyToken($token) {
         $payload = $this->getTokenPayload($token);
         // $payload = getTokenPayload($token);
         $userId = $payload['user_id'];
@@ -93,13 +92,11 @@ class User extends BaseService
     
     // }
 
-    public static function getCurrentUserId() 
-    {
+    public static function getCurrentUserId() {
         return self::$currentUserId;
     }
 
-    public static function setCurrentUserId($userId)
-    {
+    public static function setCurrentUserId($userId) {
         self::$currentUserId = $userId;
     }
 }

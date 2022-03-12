@@ -38,7 +38,11 @@ if ($stmt = $con->prepare('SELECT user_id, password FROM user WHERE name = ?')) 
             header('Location: /public/profile.php');
         } else {
             // Incorrect password
-            echo 'Incorrect username and/or password!';
+            // echo 'Incorrect username and/or password!';
+            echo '<script type= "text/javascript">';
+            echo 'alert("Invalid password!")';
+            // echo 'window.location.href = "/public/index.php" ';
+            echo '</script>';
         }
     } else {
         // Incorrect username

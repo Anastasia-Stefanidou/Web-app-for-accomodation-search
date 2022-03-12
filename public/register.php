@@ -1,6 +1,5 @@
 <?php
 
-// session_start();
 require __DIR__.'/../boot/boot.php';
 
 use Hotel\User;

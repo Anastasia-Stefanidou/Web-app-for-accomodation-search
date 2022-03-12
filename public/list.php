@@ -5,15 +5,11 @@ require __DIR__.'/../boot/boot.php';
 use Hotel\Room;
 use Hotel\RoomType;
 use Hotel\Guests;
-// use Hotel\Booking;
-
-// use DateTime;
 
 //Initialize room service
 $room = new Room();
 $type = new RoomType();
 $guest = new Guests();
-
 
 //Get page parameters
 $cities = $room->getCities();
@@ -25,19 +21,8 @@ $selectedGuest = $_REQUEST['count_of_guests'];
 $selectedTypeId = $_REQUEST['room_type'];
 $checkInDate = $_REQUEST['check_in_date'];
 $checkOutDate = $_REQUEST['check_out_date'];
-// $roomId = $_REQUEST['room_id'];
-// print_r();die;
 
 $allAvailableRooms = $room->search(new DateTime($checkInDate),new DateTime($checkOutDate), $selectedCity, $selectedTypeId, $selectedGuest);
-// print_r($allAvailableRooms);die;
-
-// $roomInfo = $room->get($roomId);
-// print_r($roomInfo);die;
-// if(isset($_GET['submit'])) {
-//   $query = $_GET['query'];
-//   echo $query;
-// }
-
 ?>
 
 <!DOCTYPE>
@@ -65,7 +50,16 @@ $allAvailableRooms = $room->search(new DateTime($checkInDate),new DateTime($chec
                 <li class="navbar-links"><a href="index.php">Home</a></li>
                 <li class="navbar-links"><a href="profile.php" target="_blank">Profile</a></li>
                 <li class="navbar-links"><a href="register.php">Register</a></li>
-                <li class="navbar-links"><a href="login.php">Log In</a></li>
+                <?php if($_SESSION['user_id']) {
+                ?>
+                    <li class="navbar-links"><a href="actions/logout.php">Log Out</a></li>
+                <?php
+                    } else {
+                ?>
+                    <li class="navbar-links"><a href="login.php">Log In</a></li>
+                <?php
+                    }
+                ?>
             </ul>
         </nav>
     </header>

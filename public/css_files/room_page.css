@@ -14,16 +14,15 @@
 
 .top_header {
     display: flex;
-    width: 75%;
+    width: 80%;
     justify-content: center;
 }
 
 .title {
-    width: 70%;
+    width: 100%;
     display: flex;
     background-color: rgb(240, 102, 48);
     color: #fff;
-    margin-right: 50px;
     padding: 5px;
     justify-content: space-around;
     align-items: center;
@@ -46,21 +45,24 @@
 }
 
 .room_info p {
-    font-size: 12px;
+    font-size: 14px;
 }
 
 .amenities {
-    width: 60%;
-    display: flex;
     background-color: rgb(240, 102, 48);
-    justify-content: space-around;
     color: #fff;
-    margin-top: 2px;
     border-radius: 2px;
+    display: flex;
+    flex-wrap: wrap;
 }
 
 .amenities p {
-    text-align: center;
+    flex: 1 1 30%;
+    padding: 10px 1px 10px 4px;
+}
+
+.amenities p:nth-child(2n+1) {
+    flex: 1 1 55%;
 }
 
 .btn {
@@ -69,9 +71,9 @@
     margin: 10px 0;
 }
 
-.btn1 , .btn2 {
+.btn3 {
     padding: 10px;
-    background-color: rgb(240, 102, 48);
+    background-color: red;
     color: #fff;
     border: none;
     border-radius: 2px;
@@ -79,13 +81,29 @@
 }
 
 .btn1 {
-    background-color: #f30909eb;
-    width: 140px;
+    background-color: #fff;
+    border: 1px solid #aaa;
+    width: 350px;
+    border-radius: 2px;
     cursor: pointer;
+    color: black;
+}
+
+.btn1:hover {
+    background-color: rgb(240, 102, 48);
+    color: #fff;
+}
+
+.check_availability {
+    text-decoration: none;
+    font-size: 12px;
 }
 
 .btn2 {
-    background-color: rgb(76 175 80);
+    background-color: blue;
+    font-size: 12px;
+    color: #fff;
+    padding: 5px;
 }
 
 .btn2 a {
@@ -93,30 +111,13 @@
     color: #fff;
 }
 
-.map {
-    width: 60%;
-}
-
-.checked {
-    color: yellow;
-}
-
 .fav {
+    display: flex;
     list-style-type: none;
     cursor: pointer;
     font-size: 24px;
-    display: flex;
     align-items: center;
-    justify-content: space-evenly;
-}
-
-.fav p {
-    font-size: 14px;
-    text-decoration: underline;
-}
-
-#favoriteForm {
-    width: 8%;
+    justify-content: space-around;
 }
 
 #favoriteForm:hover {
@@ -132,8 +133,7 @@
 .reviewForm {
     display: flex;
     flex-direction: column;
-    align-items: stretch;
-    width: 720px;
+    padding: 15px 0;
 }
 
 .reviewForm fieldset,
@@ -157,8 +157,35 @@
     width: 30%;
 }
 
-.room_info {
-    width: 60%;
+.room_info,
+.no_reviews,
+.insert_review {
+    width: 80%;
+}
+
+.first_box {
+    display: flex;
+    width: 100%;
+    justify-content: space-evenly;
+}
+
+.first_box img {
+    width: 65%;
+}
+
+.description {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.first_box .description {
+    width: 32%;
+}
+
+.description .room_title {
+    display: flex;
+    justify-content: space-around;
 }
 
 
@@ -186,11 +213,10 @@
 }
 
 .reviews {
-    width: 75%;
+    width: 50%;
+    height: 350px;
     margin-top: 15px;
-    border: 1px solid #fff;
-    border-radius: 2px;
-    background-color: #8a89890f;
+    overflow: scroll;
 }
 
 .reviews h1 {
@@ -220,4 +246,92 @@
 .content_right h5 {
     display: inline-block;
     padding-right: 20px;
+    font-size: 12px;
 }
+
+.room_reviews div:nth-child(2n+1) {
+    background-color: #ffeb3b1c;
+    height: 30px;
+}
+
+/* Pop up */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  }
+  
+  /* Modal Content/Box */
+  .modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 70%; /* Could be more or less, depending on screen size */
+  }
+  
+  /* The Close Button */
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  #myBtn {
+      cursor: pointer;
+      color: blue;
+      font-size: 16px;
+      text-decoration: underline;
+      font-weight: 100;
+      display: inline-block;
+  }
+
+  .popup i {
+      color: blue;
+      cursor: pointer;
+  }
+
+  .modal-content iframe {
+      width: 90%;
+      height: 400px;
+  }
+
+  .first_btn {
+      background-color: yellowgreen;
+  }
+
+  .book_btn {
+      display: flex;
+      justify-content: end;
+  }
+
+  .booking_details {
+      padding: 5px;
+      background-color: #aaa;
+  }
+
+.starrr {
+    display: inline-block;
+ }
+.starrr a {
+    font-size: 16px;
+    padding: 0 1px;
+    cursor: pointer;
+    color: #FFD119;
+    text-decoration: none;
+ }

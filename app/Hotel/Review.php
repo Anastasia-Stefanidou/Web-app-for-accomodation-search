@@ -7,26 +7,22 @@ use Hotel\BaseService;
 
 class Review extends BaseService
 {
-    public function getListByUser($userId){
-
+    public function getByUser($userId) {
         $parameters = [
             ':user_id' => $userId,
         ];
-
-        return $this->fetchAll('SELECT review.*, room.name 
-        FROM review 
+        return $this->fetchAll('SELECT review.*, room.name
+        FROM review
         INNER JOIN room ON review.room_id = room.room_id
         WHERE user_id = :user_id', $parameters);
-        
     }
 
-    public function insert($roomId, $userId, $rate, $comment) {
+    public function addReview($roomId, $userId, $iRate, $comment) {
         $this->getPdo()->beginTransaction();
-
         $parameters = [
             ':room_id' => $roomId,
             ':user_id' => $userId,
-            ':rate' => $rate,
+            ':rate' => $iRate,
             ':comment' => $comment,
         ];
 
@@ -54,9 +50,7 @@ class Review extends BaseService
             ':room_id' => $roomId,
         ];
         
-        // return $this->fetchAll('SELECT * FROM `review` INNER JOIN user ON review.user_id = user.user_id WHERE room_id 
-        // = :rooom_id', $parameters);
-
         return $this->fetchAll('SELECT review.*, user.name as user_name FROM review INNER JOIN user ON review.user_id = user.user_id WHERE room_id = :room_id ORDER BY created_time ASC' , $parameters);
     }
+
 }

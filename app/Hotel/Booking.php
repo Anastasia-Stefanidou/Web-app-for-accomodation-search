@@ -2,12 +2,23 @@
 
 namespace Hotel;
 
+use PDO;
 use Hotel\BaseService;
-use \DateTime;
+use DateTime;
 
-class Booking extends BaseService
-{
-    public function insert($roomId, $userId, $checkInDate, $checkOutDate) {
+class Booking extends BaseService {
+    public function getByUser($userId) {
+        $parameters = [
+            ':user_id' => $userId,
+        ];
+        return $this->fetchAll('SELECT booking.*, room.name, room.city, room.area, room.description_short, room.photo_url, room_type.title as room_type
+        FROM booking
+        INNER JOIN room ON booking.room_id = room.room_id
+        INNER JOIN room_type ON room.type_id = room_type.type_id
+        WHERE user_id = :user_id', $parameters);
+    }
+
+    public function addBooking($roomId, $userId, $checkInDate, $checkOutDate) {
         //Step 1, Begin Transaction
         $this->getPdo()->beginTransaction();
 
@@ -49,10 +60,18 @@ class Booking extends BaseService
         ];
 
         $rows = $this->fetchAll('SELECT room_id
-        FROM booking
-        WHERE room_id = :room_id AND check_in_date <=:check_out_date AND check_out_date >= :check_in_date', 
-        $parameters);
+                FROM booking
+                WHERE room_id = :room_id AND check_in_date <=:check_out_date AND check_out_date >= :check_in_date', 
+                    $parameters);
 
         return count($rows) > 0;
+    }
+
+    public function getInfo($roomId)
+    {
+        $parameters = [
+            ':room_id' => $roomId,
+        ];
+        return $this->fetch('SELECT * FROM booking WHERE room_id = :room_id', $parameters);
     }
 }

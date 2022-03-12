@@ -5,17 +5,14 @@ namespace Hotel;
 use PDO;
 use support\configuration\configuration;
 
-class BaseService 
-{
+class BaseService {
     private static $pdo;
 
-    public function __construct()
-    {
+    public function __construct() {
         $this->initializePdo();
     }
 
-    protected function initializePdo()
-    {
+    protected function initializePdo() {
         if (!empty(self::$pdo)) {
             return;
         }
@@ -49,52 +46,40 @@ class BaseService
         
     // }
 
-     protected function execute($sql,  $parameters)
-       {
-           //Prepare statement
-          $statement = $this->getPdo()->prepare($sql);
+    protected function execute($sql, $parameters) {
+        //Prepare statement
+        $statement = $this->getPdo()->prepare($sql);
+        $status = $statement->execute($parameters); 
+        if (!$status) {
+            throw new Exception($statement->errorInfo()[2]);
+        }
 
-          $status = $statement->execute($parameters);
-         
-            if (!$status) {
-                throw new Exception($statement->errorInfo()[2]);
-            }
-
-           return $status;
-      }
+        return $status;
+    }
   
-     protected function fetchAll($sql, $parameters = [], $type = PDO::FETCH_ASSOC)
-        {
-            //Prepare statement
-            $statement = $this->getPdo()->prepare($sql);
-
-            //Bind parameters
-            foreach ($parameters as $key => $value) {
-                $statement->bindValue($key, $value, is_int($value) ? PDO::PARAM_INT : PDO::PARAM_STR);
-            }
-
-            $statement->execute();
-            return $statement->fetchAll($type);
-        
+    protected function fetchAll($sql, $parameters = [], $type = PDO::FETCH_ASSOC) {
+        //Prepare statement
+        $statement = $this->getPdo()->prepare($sql);
+        $status = $statement->execute($parameters);
+        if (!$status) {
+            throw new Exception($statement->errorInfo()[2]); 
         }
+        //Fetch All
+        return $statement->fetchAll($type);        
+    }
 
-        protected function fetch($sql, $parameters = [], $type = PDO::FETCH_ASSOC)
-        {
-            //Prepare statement
-            $statement = $this->getPdo()->prepare($sql);
-
-            foreach ($parameters as $key => $value) {
-                $statement->bindValue($key, $value, is_int($value) ? PDO::PARAM_INT : PDO::PARAM_STR);
-            }
-
-            $status = $statement->execute();
-
-            return $statement->fetch($type);
-                
+    protected function fetch($sql, $parameters = [], $type = PDO::FETCH_ASSOC) {
+        //Prepare statement
+        $statement = $this->getPdo()->prepare($sql);
+        $status = $statement->execute($parameters);
+        if (!$status) {
+            throw new Exception($statement->errorInfo()[2]); 
         }
+        //Fetch All
+        return $statement->fetch($type);                
+    }
 
-   protected function getPdo()
-    {
+   protected function getPdo() {
         return self::$pdo;
     }
 }

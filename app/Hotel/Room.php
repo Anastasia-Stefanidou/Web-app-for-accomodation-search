@@ -7,18 +7,15 @@ use DateTime;
 use Hotel\BaseService;
 
 
-class Room extends BaseService 
-{
-    public function get($roomId)
-    {
+class Room extends BaseService {
+    public function get($roomId) {
         $parameters = [
             ':room_id' => $roomId,
         ];
         return $this->fetch('SELECT * FROM room WHERE room_id = :room_id', $parameters);
     }
 
-    public function getAllGuests()
-    {
+    public function getAllGuests() {
         $guests = [];
         $rows = $this->fetchAll('SELECT DISTINCT count_of_guests FROM room');
 
@@ -40,8 +37,7 @@ class Room extends BaseService
         return $cities;
     }
 
-    public function search($checkInDate, $checkOutDate, $selectedCity = '', $selectedTypeId = '', $selectedGuest = '')
-     {
+    public function search ($checkInDate, $checkOutDate, $selectedCity = '', $selectedTypeId = '', $selectedGuest = '') {
         //Setup parameters
         $parameters = [
             ':check_in_date' => $checkInDate->format(DateTime::ATOM),
@@ -84,6 +80,5 @@ class Room extends BaseService
 
         return $this->fetchAll($sql, $parameters);
     }
-
 }
 
