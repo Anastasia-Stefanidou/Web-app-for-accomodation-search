@@ -14,34 +14,37 @@
 
 .top_header {
     display: flex;
-    width: 80%;
+    width: 100%;
     justify-content: center;
 }
 
 .title {
     width: 100%;
     display: flex;
-    background-color: rgb(240, 102, 48);
-    color: #fff;
+    /* background-color: rgb(240, 102, 48); */
     padding: 5px;
-    justify-content: space-around;
+    color: #fff;
     align-items: center;
+    background-color: #f94327;
+    background-image: linear-gradient(316deg, #f94327 0%, #ff7d14 74%);
 }
 
 .title h1, .title h2 {
     font-size: 16px;
     font-weight: 200;
+    margin-left: 8px;
+}
+
+.title h2 {
+    margin-left: auto;
+    margin-right: 8px;
 }
 
 .room_info {
     display: flex;
     flex-direction: column;
-    width: 60%;
+    width: 100%;
     margin-top: 20px;
-}
-
-.room_info img {
-    width: 80%;
 }
 
 .room_info p {
@@ -49,8 +52,10 @@
 }
 
 .amenities {
-    background-color: rgb(240, 102, 48);
-    color: #fff;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,.26);
+    background-color: #d9d9d9;
+    background-image: linear-gradient(315deg, #d9d9d9 0%, #f6f2f2 74%);
+    color: black;
     border-radius: 2px;
     display: flex;
     flex-wrap: wrap;
@@ -58,11 +63,12 @@
 
 .amenities p {
     flex: 1 1 30%;
-    padding: 10px 1px 10px 4px;
+    padding: 5px 0px 0px 5px;
+    font-size: 12px;
 }
 
 .amenities p:nth-child(2n+1) {
-    flex: 1 1 55%;
+    flex: 0 1 55%;
 }
 
 .btn {
@@ -81,12 +87,18 @@
 }
 
 .btn1 {
-    background-color: #fff;
-    border: 1px solid #aaa;
-    width: 350px;
-    border-radius: 2px;
     cursor: pointer;
-    color: black;
+    border-radius: 8px;
+    outline: none;
+    font-weight: 600;
+    width: 150px;
+    padding: 10px 15px;
+    transition: box-shadow 0.2s ease 0s, -ms-transform 0.1s ease 0s, -webkit-transform 0.1s ease 0s, transform 0.1s ease 0s;
+    -webkit-tap-highlight-color: transparent;
+    border: none;
+    background-color: #f94327;
+    background-image: linear-gradient(316deg, #f94327 0%, #ff7d14 74%);
+    color: #fff;
 }
 
 .btn1:hover {
@@ -97,13 +109,29 @@
 .check_availability {
     text-decoration: none;
     font-size: 12px;
+    color: #fff;
+}
+
+.check_availability:hover {
+    text-decoration: none;
+    color: whitesmoke;
+}
+
+.checked {
+    color: rgb(255, 152, 0);
 }
 
 .btn2 {
-    background-color: blue;
+    cursor: pointer;
+    border-radius: 8px;
+    outline: none;
+    font-weight: 600;
+    padding: 10px 15px;
+    width: 100px;
+    background-color: #29539b;
+    background-image: linear-gradient(315deg, #29539b 0%, #1e3b70 74%);
     font-size: 12px;
     color: #fff;
-    padding: 5px;
 }
 
 .btn2 a {
@@ -130,37 +158,8 @@
     color: #d65076;
 }
 
-.reviewForm {
-    display: flex;
-    flex-direction: column;
-    padding: 15px 0;
-}
-
-.reviewForm fieldset,
-.reviewForm textarea {
-    padding: 5px;
-    margin: 5px 0 10px 0;
-}
-
-.reviewForm button {
-    align-self: center;
-    padding: 5px;
-    cursor: pointer;
-    margin: 5px 0 5px 0;
-    background-color: rgb(240, 102, 48);
-    color: #fff;
-    border: none;
-    border-radius: 2px;
-}
-
 .insert_review {
     width: 30%;
-}
-
-.room_info,
-.no_reviews,
-.insert_review {
-    width: 80%;
 }
 
 .first_box {
@@ -169,18 +168,11 @@
     justify-content: space-evenly;
 }
 
-.first_box img {
-    width: 65%;
-}
-
 .description {
+    width: 45%;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-}
-
-.first_box .description {
-    width: 32%;
 }
 
 .description .room_title {
@@ -188,6 +180,9 @@
     justify-content: space-around;
 }
 
+.room_title h4 {
+    font-size: 20px;
+}
 
 @media screen and (max-width: 800px) {
     .title {
@@ -212,19 +207,6 @@
     }
 }
 
-.reviews {
-    width: 50%;
-    height: 350px;
-    margin-top: 15px;
-    overflow: scroll;
-}
-
-.reviews h1 {
-    font-size: 20px;
-    font-weight: 100;
-    text-align: center;
-}
-
 .room_reviews {
     display: flex;
     margin-bottom: 10px;
@@ -232,21 +214,26 @@
 }
 
 .content_left {
-    width: 30%;
+    display: flex;
+    align-items: baseline;
 }
 
 .content_left span {
     text-transform: capitalize;
+    margin-right: 20px;
 }
 
-.content_right {
-    width: 70%;
-}
-
-.content_right h5 {
-    display: inline-block;
-    padding-right: 20px;
+.content_left h5 {
     font-size: 12px;
+    color: #878787;
+}
+
+.content_right .stars span {
+    font-size: 15px;
+}
+
+.content_right p {
+    border-bottom: 1px dotted #878787 ;
 }
 
 .room_reviews div:nth-child(2n+1) {
@@ -268,25 +255,37 @@
     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
   }
   
-  /* Modal Content/Box */
-  .modal-content {
+  .modal-content,
+  .modal-content1 {
     background-color: #fefefe;
-    margin: 15% auto; /* 15% from the top and centered */
+    margin: 15% auto; 
     padding: 20px;
     border: 1px solid #888;
-    width: 70%; /* Could be more or less, depending on screen size */
+    width: 70%; 
+  }
+
+  .modal-content1 {
+    width: 37%;
   }
   
-  /* The Close Button */
-  .close {
+  .close,
+  .close1 {
     color: #aaa;
     float: right;
     font-size: 28px;
     font-weight: bold;
   }
   
+  .modal-content p.close{
+    position: fixed;
+    font-size: 22px;
+    margin-left: 930px;
+  }
+
   .close:hover,
-  .close:focus {
+  .close:focus,
+  .close1:hover,
+  .close1:focus {
     color: black;
     text-decoration: none;
     cursor: pointer;
@@ -329,9 +328,126 @@
     display: inline-block;
  }
 .starrr a {
-    font-size: 16px;
+    font-size: 20px;
     padding: 0 1px;
     cursor: pointer;
-    color: #FFD119;
+    color: rgb(255, 152, 0);
     text-decoration: none;
  }
+
+ .average_reviews {
+     display: flex;
+     justify-content: space-around;
+     width: 350px;
+     align-items: baseline;
+ }
+
+ #myBtn1 {
+    background-color: #d9d9d9;
+    background-image: linear-gradient(315deg, #d9d9d9 0%, #f6f2f2 74%);
+    position: absolute;
+    margin-left: 350px;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,.26);
+    padding: 5px;
+    border: none;
+    width: 120px;
+    font-size: 14px;
+    white-space: nowrap;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+ }
+
+ .popup .fa-pencil {
+    color: black;
+ }
+
+ .average_reviews h1 {
+    color: rgb(255, 152, 0);
+    font-size: 26px;
+ }
+
+ .average_reviews p {
+    color: #878787;
+    font-size: 16px;
+ }
+
+ .stars span {
+     font-size: 22px;
+ }
+
+.reviewForm {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 200px;
+}
+
+.insertReview {
+    width: 450px;
+}
+
+.insertReview h1 {
+    font-size: 16px;
+}
+
+#review {
+    background-color: rgb(240, 102, 48);
+    align-self: center;
+    padding: 5px;
+    border: none;
+    color: white;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,.26);
+    margin-top: 10px;
+}
+
+#comment {
+    height: 100px;
+}
+
+.second_container {
+    display: flex;
+    width: 80%;
+    margin-top: 20px;
+}
+
+.reviews {
+    margin-left: 25px;
+}
+
+/* Image gallery */
+#selected_img {
+	max-width: 800px;
+	width: 100%;
+	height: auto;
+	margin: 0 auto;
+ }
+
+ #selected_img img {
+	width: 100%;
+	height: 330px;
+ }
+
+ #image_list {
+     display: flex;
+ }
+
+ #image_list li {
+    margin-top: 10px;
+	flex: 1 1 30%;
+	display: inline-block;
+	max-height: 250px;
+	cursor: pointer;
+ }
+
+ #image_list li img {
+	width: 98%;
+    height: 100px;
+ }
+
+ .image_gallery {
+	 width: 50%;
+ }
+
+

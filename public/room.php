@@ -75,14 +75,14 @@ if ($roomTitle == 1) {
     <!-- <link rel="stylesheet" href= "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css" integrity="sha384-Bfad6CLCknfcloXFOyFnlgtENryhrpZCe29RTifKEixXQZ38WheV+i/6YWSzkz3V" crossorigin="anonymous" /> -->
     <script src="js_files/popup.js"></script>
-    <title><?php echo $roomInfo['name'] ;?></title>
+    <title><?php echo $roomInfo['name'] ;?> | TravelBug</title>
   </head>
   <body>
     <header>
       <nav class="navbar">
           <ul>
               <li class="navbar-logo">TravelBug</li>
-              <li class="navbar-toggle"><i class="fas fa-bars"></i></li>
+              <li class="navbar-toggle"><i class="fa fa-bars"></i></li>
               <li class="navbar-links"><a href="index.php">Home</a></li>
               <li class="navbar-links"><a href="profile.php" target="_blank">Profile</a></li>
               <li class="navbar-links"><a href="register.php">Register</a></li>
@@ -94,30 +94,25 @@ if ($roomTitle == 1) {
       <div class= "top_header">
         <div class="title">
             <h1><?php echo sprintf('%s - %s, %s', $roomInfo['name'], $roomInfo['city'], $roomInfo['area']) ?></h1>
-            <h2>Reviews</h2>
-            <?php
-              $roomAvgReview = $roomInfo['avg_reviews']; 
-                for ($i=1; $i <=5; $i++) {
-                  if ($roomAvgReview >= $i) {
-            ?>
-                  <span class="fa fa-star checked"></span>
-            <?php
-              } else { 
-            ?>
-                  <span class="fa fa-star"></span>
-            <?php
-                }
-              }
-            ?>  
             <h2>Per Night: <?php echo $roomInfo['price'] ?>&euro;</h2>
         </div>
       </div>
         <div class="room_info">
           <div class="first_box">
-            <img src="/../extra/images/<?php echo $roomInfo['photo_url']; ?>" alt="room-2" width="700px" height="500px">
+            <div class="image_gallery">
+              <div id="selected_img">
+                  <img src="/../extra/images/<?php echo $roomInfo['photo_url1']; ?>" alt="<?php echo $roomInfo['name'] ;?>">
+              </div>
+              <ul id="image_list">
+                  <li><img src="/../extra/images/<?php echo $roomInfo['photo_url2']; ?>" alt="<?php echo $roomInfo['name'] ;?>"></li>
+                  <li><img src="/../extra/images/<?php echo $roomInfo['photo_url3']; ?>" alt="<?php echo $roomInfo['name'] ;?>"></li>
+                  <li><img src="/../extra/images/<?php echo $roomInfo['photo_url4']; ?>" alt="<?php echo $roomInfo['name'] ;?>"></li>
+                  <li><img src="/../extra/images/<?php echo $roomInfo['photo_url5']; ?>" alt="<?php echo $roomInfo['name'] ;?>"></li>
+              </ul>
+          </div>  
             <div class="description">
               <div class="room_title">
-                <h4>Room Description</h4>
+                <h4><?php echo $roomInfo['name'] ?></h4>
                 <form action="actions/favorite.php" name="favoriteForm" method="post" id="favoriteForm" class="favoriteForm">
                 <input type="hidden" name="room_id" value="<?php echo $roomId; ?>">
                 <input type="hidden" name="is_favorite" value="<?php echo $isFavorite ? '1' : '0'; ?>">
@@ -127,26 +122,26 @@ if ($roomTitle == 1) {
                 </form>
               </div>
               <div class= "popup">
-                <i class="fas fa-map"></i> <h1 button id="myBtn">Excellent location - Show map</h1>
+                <i class="fa fa-map-marker"></i> <h1 button id="myBtn">Excellent location - Show map</h1>
                 <div id="myModal" class="modal">
-                <div class="modal-content">
-                    <span class="close">&times;</span>
-                    <iframe src="https://maps.google.com/maps?q=<?php echo $roomInfo['location_lat'] ?>, <?php echo $roomInfo['location_long'] ?>&output=embed" frameborder="0" style="border:0"></iframe>
-                </div>
-                </div>
+                  <div class="modal-content">
+                      <p class="close">&times;</p>
+                      <iframe src="https://maps.google.com/maps?q=<?php echo $roomInfo['location_lat'] ?>, <?php echo $roomInfo['location_long'] ?>&output=embed" frameborder="0" style="border:0"></iframe>
+                  </div>
+              </div>
               </div>
               <p><?php echo $roomInfo['description_long'] ?></p>
               <div class="amenities">
-                <p><i class="fas fa-user-alt"></i> COUNT OF GUESTS: </p><p><?php echo $roomInfo['count_of_guests'] ?></p>
-                <p><i class="fas fa-bed"></i> TYPE OF ROOM: </p><p><?php echo $roomTitle ?></p>
-                <p><i class="fas fa-parking"></i> PARKING: </p><p><?php echo $roomInfo['parking'] == 1 ? 'Yes' : 'No' ?></p>
-                <p><i class="fas fa-wifi"></i> WIFI: </p><p><?php echo $roomInfo['wifi'] == 1 ? 'Yes' : 'No' ?></p>
-                <p><i class="fas fa-paw"></i> PET FRIENDLY: </p><p><?php echo $roomInfo['pet_friendly'] == 1 ? 'Yes' : 'No' ?></p>
+                <p><i class="fa fa-user"></i> COUNT OF GUESTS: </p><p><?php echo $roomInfo['count_of_guests'] ?></p>
+                <p><i class="fa fa-building"></i> TYPE OF ROOM: </p><p><?php echo $roomTitle ?></p>
+                <p><i class="fa fa-car"></i> PARKING: </p><p><?php echo $roomInfo['parking'] == 1 ? 'Yes' : 'No' ?></p>
+                <p><i class="fa fa-wifi"></i> WIFI: </p><p><?php echo $roomInfo['wifi'] == 1 ? 'Yes' : 'No' ?></p>
+                <p><i class="fa fa-paw"></i> PET FRIENDLY: </p><p><?php echo $roomInfo['pet_friendly'] == 1 ? 'Yes' : 'No' ?></p>
               </div>
                 <?php
                   if ($datesMissing) {
                 ?>
-                  <span class="btn1"><a class= "check_availability" href = "list.php">Please fill both dates to check availability.</a></span>
+                  <span class="btn1"><a class= "check_availability" href = "list.php">Check availability</a></span>
                 <?php
                   } elseif ($alreadyBooked) {
                 ?>
@@ -166,7 +161,7 @@ if ($roomTitle == 1) {
                 <?php
                   } else {
                 ?>
-                <span class="btn2">Log in first</span>
+                <span class="btn2"><a href = "login.php">Log in first</a></span>
                 <?php
                   }
                 ?>
@@ -177,78 +172,89 @@ if ($roomTitle == 1) {
             </div>
           </div>
           </div>
-          <div class= "all_reviews">
-            <div class="show_reviews">
-              
-            </div>
-          </div>             
-        <?php
-            if(count($allReviews) > 0) {
-        ?>
+          <div class="second_container">
           <div class="reviews">
-            <h1>Reviews</h1>
-            <div id="room-reviews-container">
-            <?php
-              foreach ($allReviews as $counter => $review) {
-            ?>
-            <div class= "room_reviews">
-              <div class="content_left">
-                <span><?php echo sprintf ('%d. %s', $counter + 1, $review['user_name']); ?></span>
+            <div class= "popup">
+              <button id="myBtn1"><i class="fa fa-pencil"></i>POST REVIEW</button>
+              <div id="myModal1" class="modal">
+                <div class="modal-content1">
+                  <span class="close1">&times;</span>
+                  <div class="insertReview">
+                  <h1>Your review</h1>
+                  <form method="POST" class="reviewForm" onsubmit="return saveRatings(this);">
+                    <input type="hidden" name="room_id" value="<?php echo $roomId ?>">
+                    <input type="hidden" name="user_id" value="<?php echo $userId ?>">
+                    <p><div class="starrr"></div></p>
+                    <textarea name= "comment" id= "comment" placeholder = "Your review..." value="<?php echo $comment ?>"></textarea>
+                    <input type="submit" id="review">
+                  </form>
+                  <div class="rate"></div>
+                  </div>
+                </div>
               </div>
-              <div class="content_right">
-                <h5><?php echo $review['created_time']; ?></h5>
-                  <?php
-                    for ($i=1; $i <=5; $i++) {
-                      if ($review['rate'] >= $i) {
-                          ?>
-                          <span class="fa fa-star checked"></span>
-                          <?php
+            </div>
+            <?php
+              if ($roomInfo['avg_reviews']) {
+            ?>
+              <div class="average_reviews">
+                <h1><?php echo $roomInfo['avg_reviews']; ?></h1>
+                  <div class="stars">
+                    <?php
+                    $roomAvgReview = $roomInfo['avg_reviews'];
+                      for ($i=1; $i <=5; $i++) {
+                        if ($roomAvgReview >= $i) {
+                    ?>
+                        <span class="fa fa-star checked"></span>
+                    <?php 
                       } else { 
-                          ?>
-                          <span class="fa fa-star"></span>
-                          <?php
+                    ?>
+                        <span class="fa fa-star"></span>
+                    <?php
+                        }
                       }
+                    ?>
+                  </div>
+                  <p><span><?php echo $roomInfo['count_reviews'] ?></span> reviews</p> 
+                </div>
+                <div class="reviews">
+                  <?php
+                    foreach ($allReviews as $counter => $review) {
+                  ?>
+                    <div class="content_left">
+                      <span><?php echo sprintf ('%d. %s', $counter + 1, $review['user_name']); ?></span>
+                      <h5><?php echo $review['created_time']; ?></h5>
+                    </div>
+                    <div class="content_right">
+                      <div class="stars">
+                        <?php
+                          for ($i=1; $i <=5; $i++) {
+                            if ($review['rate'] >= $i) {
+                        ?>
+                            <span class="fa fa-star checked"></span>
+                        <?php
+                            } else { 
+                        ?>
+                            <span class="fa fa-star"></span>
+                        <?php
+                            }
+                        }
+                        ?>  
+                      </div>
+                    <p><?php echo htmlentities ($review['comment']); ?></p>
+                  <?php
+                    }
+                  ?>
+                  </div>
+                </div>
+            <?php 
+                } else { 
+              ?>
+              <span>This room has no reviews yet.</span>
+              <?php
                   }
               ?>  
-              <p><?php echo htmlentities ($review['comment']); ?></p>
-              </div>
-            </div>
-            <?php
-              }
-            ?>
-            </div>
-          </div>
-        <?php
-            } else {
-        ?>
-        <div class = "no_reviews">
-          <p>There are no reviews yet.</p>
-        <?php
-            }
-        ?>
-        </div>
-        <!-- <div class="insert_review">
-            <form class= "reviewForm" name="reviewForm" method="post" action ="actions/review.php">
-                <input type="hidden" name="room_id" value="<?php echo $roomId ?>">
-                <p>Add new Review!</p>
-                <input type="hidden" id="rate" name="rating" value="<?php echo $iRate ?>">
-                <p>Based on: <span><?php echo $roomInfo['count_reviews'] ?></span> rating</p>
-                <textarea name= "comment" id= "comment" placeholder = "Review" ></textarea>
-                <button type = "submit" id= "review" onsubmit="return showRating(this);">Submit</button>
-            </form>
-        </div> -->
-        <div>
-        </div>
-        <form method="POST" onsubmit="return saveRatings(this);">
-        <input type="hidden" name="room_id" value="<?php echo $roomId ?>">
-        <input type="hidden" name="user_id" value="<?php echo $userId ?>">
-        <textarea name= "comment" id= "comment" placeholder = "Review" value="<?php echo $comment ?>"></textarea>
-            <p>
-                <div class="starrr"></div>
-            </p>
-            <input type="submit">
-      </form>
-      <div class="rate"></div>
+          </div> 
+          </div>          
       <script>
         var rate = 0;
         $(function () {
@@ -273,16 +279,25 @@ if ($roomTitle == 1) {
                 },
                 success: function (response) {
                     alert(response);
+                    // $('.modal-content1').html(response);
                 }
             });
             return false;
         }
+        // var selectedImg = document.getElementById('selected_img');
+        // var images = document.getElementById('image_list').getElementsByTagName('li');
+        // for (i = 0; i < images.length; i++) {
+        // images[i].addEventListener('click', activateImage);
+        // }
+        // function activateImage() {
+        // selectedImg.innerHTML = this.innerHTML;
+        // }
     </script>
     </main>
     <footer class="margin-top">
         <p> &copy; ΔΙΠΑΕ 2021</p>
     </footer>
-  <script src="js_files/responsive_navbar.js"></script> -->
+  <script src="js_files/responsive_navbar.js"></script>
   </body>
 </html>
 

@@ -127,7 +127,7 @@ $userBookings = $booking->getByUser($userId);
       </div>
       <div class= "right">
         <div class="title">
-          <h1>Hello <?php echo $_SESSION['name']; ?> , your bookings</h1>
+          <h1>Hello, your bookings</h1>
         </div>
           <?php
             if (count($userBookings) > 0) {

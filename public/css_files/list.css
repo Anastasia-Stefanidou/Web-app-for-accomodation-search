@@ -50,7 +50,8 @@ main {
 }
 
 .btn {
-    background-color: rgb(240, 102, 48);
+    background-color: #f94327;
+    background-image: linear-gradient(316deg, #f94327 0%, #ff7d14 74%);
     color: #fff;
     border: none;
     border-radius: 2px;
@@ -68,7 +69,8 @@ main {
 }
 
 .container2 .title {
-    background-color: rgb(240, 102, 48);
+    background-color: #f94327;
+    background-image: linear-gradient(316deg, #f94327 0%, #ff7d14 74%);
     color: #fff;
     padding: 5px;
     font-weight: 200;
@@ -138,7 +140,8 @@ main {
 }
 
 .room-page {
-    background-color: rgb(240, 102, 48);
+    background-color: #f94327;
+    background-image: linear-gradient(316deg, #f94327 0%, #ff7d14 74%);
     color: #fff;
     padding: 5px;
     cursor: pointer;
