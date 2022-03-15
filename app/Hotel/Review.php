@@ -17,12 +17,31 @@ class Review extends BaseService
         WHERE user_id = :user_id', $parameters);
     }
 
-    public function addReview($roomId, $userId, $iRate, $comment) {
+    public function averageReview($roomId) {
+        $this->getPdo()->beginTransaction();
+
+        $parameters = [
+            'room_id' => $roomId,
+        ];
+        $roomAverage = $this->fetch('SELECT avg(rate) as avg_reviews, count(*) as count FROM review WHERE room_id = :room_id', $parameters);
+
+        $parameters = [
+            'room_id' => $roomId,
+            'avg_reviews' => $roomAverage['avg_reviews'],
+            'count_reviews' => $roomAverage['count'],
+        ];
+
+        $this->execute('UPDATE room SET avg_reviews = :avg_reviews, count_reviews = :count_reviews WHERE room_id = :room_id', $parameters);
+
+        return $this->getPdo()->commit();
+    }
+
+    public function addReview($roomId, $userId, $rate, $comment) {
         $this->getPdo()->beginTransaction();
         $parameters = [
             ':room_id' => $roomId,
             ':user_id' => $userId,
-            ':rate' => $iRate,
+            ':rate' => $rate,
             ':comment' => $comment,
         ];
 

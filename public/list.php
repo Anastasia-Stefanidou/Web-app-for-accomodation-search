@@ -31,7 +31,7 @@ $allAvailableRooms = $room->search(new DateTime($checkInDate),new DateTime($chec
   <meta name="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="noindex,nofollow">
-  <title>Search Page</title>
+  <title>Search Page | TravelBug</title>
   <link rel="stylesheet" href="css_files/basic_styles.css">
   <link rel="stylesheet" href="css_files/list.css">
    <link

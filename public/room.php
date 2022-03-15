@@ -31,6 +31,8 @@ $userId = User::getCurrentUserId();
 $isFavorite = $favorite->isFavorite($roomId, $userId);
 
 $allReviews = $review->getReviewsByRoom($roomId);
+$averageReview = $review->averageReview($roomId);
+// print_r($averageReview);
 
 $checkInDate = $_REQUEST['check_in_date'];
 $checkOutDate = $_REQUEST['check_out_date'];
@@ -201,7 +203,7 @@ if ($roomTitle == 1) {
                   <div class="stars">
                     <?php
                     $roomAvgReview = $roomInfo['avg_reviews'];
-                      for ($i=1; $i <=5; $i++) {
+                      for ($i=1; $i <= 5; $i++) {
                         if ($roomAvgReview >= $i) {
                     ?>
                         <span class="fa fa-star checked"></span>
