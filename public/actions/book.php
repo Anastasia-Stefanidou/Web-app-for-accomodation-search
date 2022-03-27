@@ -28,7 +28,20 @@ if (empty($roomId)) {
 $booking = new Booking();
 $checkInDate = $_REQUEST['check_in_date'];
 $checkOutDate = $_REQUEST['check_out_date'];
-$booking->addBooking($roomId, User::getCurrentUserId(), $checkInDate, $checkOutDate);
+$year = $_REQUEST['year'];
+$month = $_REQUEST['month'];
+$CVC = $_REQUEST['CVC'];
+$card = $_REQUEST['card'];
+
+$failed = empty($checkInDate) || empty($checkOutDate) || empty($year) || empty($month) || empty($CVC) || empty($card);
+if (!$failed) {
+    $booking->addBooking($roomId, User::getCurrentUserId(), $checkInDate, $checkOutDate);
+    header(sprintf('Location: ../profile.php'));
+} else {
+    echo "<p style='font-size:20px;'>Please fill correctly all fields</p>";
+    // echo "Please fill correctly all fields";
+}
 
 //Return to home page
-header(sprintf('Location: ../room.php?room_id=%s', $roomId));
+// header(sprintf('Location: ../profile.php'));
+// header(sprintf('Location: ../room.php?room_id=%s&check_in_date=%s&check_out_date=%s', $roomId, $checkInDate, $checkOutDate));

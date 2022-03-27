@@ -3,6 +3,7 @@
 require __DIR__.'/../boot/boot.php';
 
 use Hotel\Room;
+use Hotel\User;
 use Hotel\RoomType;
 use Hotel\Guests;
 
@@ -23,6 +24,9 @@ $checkInDate = $_REQUEST['check_in_date'];
 $checkOutDate = $_REQUEST['check_out_date'];
 
 $allAvailableRooms = $room->search(new DateTime($checkInDate),new DateTime($checkOutDate), $selectedCity, $selectedTypeId, $selectedGuest);
+
+// Get current user id
+$userId = User::getCurrentUserId();
 ?>
 
 <!DOCTYPE>
@@ -45,18 +49,19 @@ $allAvailableRooms = $room->search(new DateTime($checkInDate),new DateTime($chec
     <header>
         <nav class="navbar">
             <ul>
-                <li class="navbar-logo">TravelBug</li>
+                <li class="navbar-logo"><a href="index.php">TravelBug</a></li>
                 <li class="navbar-toggle"><i class="fas fa-bars"></i></li>
                 <li class="navbar-links"><a href="index.php">Home</a></li>
                 <li class="navbar-links"><a href="profile.php" target="_blank">Profile</a></li>
-                <li class="navbar-links"><a href="register.php">Register</a></li>
-                <?php if($_SESSION['user_id']) {
+                <?php
+                  if (!empty($userId)) {
                 ?>
-                    <li class="navbar-links"><a href="actions/logout.php">Log Out</a></li>
+                    <li class="navbar-links"><a href='actions/logout.php'>Log out</a></li>
                 <?php
                     } else {
                 ?>
-                    <li class="navbar-links"><a href="login.php">Log In</a></li>
+                    <li class="navbar-links"><a href="register.php">Register</a></li>
+                    <li class="navbar-links"><a href='login.php'>Log in</a></li>
                 <?php
                     }
                 ?>
@@ -96,18 +101,18 @@ $allAvailableRooms = $room->search(new DateTime($checkInDate),new DateTime($chec
                 }
               ?>
         </select>
-        <input type="date"  name="check_in_date" id="from" value="<?php echo $checkInDate; ?>" placeholder="Check-in Date" class="cont_item4 cont_item">
-        <input type="date" name="check_out_date" id="to" value="<?php echo $checkOutDate; ?>" placeholder="Check-out Date" class="cont_item5 cont_item">
+        <input type="date"  name="check_in_date" id="from" value="<?php echo $checkInDate; ?>" placeholder="Check-in Date" class="cont_item4 cont_item" >
+        <input type="date" name="check_out_date" id="to" value="<?php echo $checkOutDate; ?>" placeholder="Check-out Date" class="cont_item5 cont_item" min="<?php echo date("Y-m-d"); ?>">
         <input class="cont_item6 cont_item btn" id="submitButton" name="submit" type="submit" value="FIND HOTELS"/>    
     </form>
     <div class= "item item2 container2">
         <h2 class="title">Search Results</h2>
-            <?php
-                foreach ($allAvailableRooms as $availableRoom) {
-            ?>
+        <?php
+            foreach ($allAvailableRooms as $availableRoom) {
+        ?>
         <div class="hotel">
             <div class="media">
-                <img src="/../extra/images/<?php echo $availableRoom['photo_url']; ?> " alt="room_photo">
+                <img src="/../extra/images/<?php echo $availableRoom['photo_url']; ?> " alt="room_photo"> 
                 <span class="price">Per night: <?php echo $availableRoom['price']; ?> &euro;</span>
             </div>
             <div class="info">

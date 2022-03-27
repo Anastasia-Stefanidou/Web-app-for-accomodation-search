@@ -6,6 +6,7 @@ use Hotel\BaseService;
 
 
 class Favorite extends BaseService {
+    
     public function getByUser($userId) {
         $parameters = [
             ':user_id' => $userId,

@@ -1,7 +1,5 @@
 <?php
-
 require __DIR__.'/../boot/boot.php';
-
 use Hotel\Room;
 use Hotel\RoomType;
 use Hotel\User;
@@ -16,7 +14,6 @@ $allTypes = $type->getAllTypes();
 
 $allAvailableRooms = $room->search(new DateTime($checkInDate),new DateTime($checkOutDate), $selectedCity, $selectedTypeId);
 $userId = User::getCurrentUserId();
-print_r($userId);
 ?>
 
 <!DOCTYPE>
@@ -25,7 +22,7 @@ print_r($userId);
     <meta name="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="noindex,nofollow">
-    <title>Home Page</title>
+    <title>Home Page | TravelBug</title>
     <link
       rel="stylesheet"
       href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css"
@@ -43,18 +40,19 @@ print_r($userId);
     <header>
           <nav class="navbar">
               <ul>
-                  <li class="navbar-logo">TravelBug</li>
+                  <li class="navbar-logo"><a href="index.php">TravelBug</a></li>
                   <li class="navbar-toggle"><i class="fas fa-bars"></i></li>
                   <li class="navbar-links current_page"><a href="#">Home</a></li>
                   <li class="navbar-links"><a href="profile.php" target="_blank">Profile</a></li>
-                  <li class="navbar-links"><a href="register.php">Register</a></li>
-                  <?php if($_SESSION['user_id']) {
+                  <?php
+                    if (!empty($userId)) {
                   ?>
-                      <li class="navbar-links"><a href="actions/logout.php">Log Out</a></li>
+                      <li class="navbar-links"><a href='actions/logout.php'>Log out</a></li>
                   <?php
                       } else {
                   ?>
-                      <li class="navbar-links"><a href="login.php">Log In</a></li>
+                      <li class="navbar-links"><a href="register.php">Register</a></li>
+                      <li class="navbar-links"><a href='login.php'>Log in</a></li>
                   <?php
                       }
                   ?>
@@ -83,8 +81,8 @@ print_r($userId);
                   }
                 ?>
               </select>
-              <input class="item item3" type="date"  name="check_in_date" id="from" placeholder="Check-in Date">
-              <input class="item item4" type="date" name="check_out_date" id="to" placeholder="Check-out Date">
+              <input class="item item3" type="date"  name="check_in_date" id="from" placeholder="Check-in Date" min="<?php echo date("Y-m-d"); ?>">
+              <input class="item item4" type="date" name="check_out_date" id="to" placeholder="Check-out Date" min="<?php echo date("Y-m-d"); ?>">
               <div class="search_btn">
                   <input id="submitButton" type="submit" value="Search"/>
               </div>

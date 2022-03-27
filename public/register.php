@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 require __DIR__.'/../boot/boot.php';
 
@@ -29,13 +30,13 @@ use Hotel\User;
       integrity="sha384-Bfad6CLCknfcloXFOyFnlgtENryhrpZCe29RTifKEixXQZ38WheV+i/6YWSzkz3V"
       crossorigin="anonymous"
     />
-    <title>Register Page</title>
+    <title>Register Page | TravelBug</title>
 </head>
 <body>
     <header>
         <nav class="navbar">
             <ul>
-                <li class="navbar-logo">TravelBug</li>
+                <li class="navbar-logo"><a href="index.php">TravelBug</a></li>
                 <li class="navbar-toggle"><i class="fas fa-bars"></i></li>
                 <li class="navbar-links"><a href="index.php">Home</a></li>
                 <li class="navbar-links"><a href="profile.php" target="_blank">Profile</a></li>
@@ -48,20 +49,20 @@ use Hotel\User;
         <div class="container">
             <div class="content-left">
                 <form action="actions/register.php" method="post" class="form">
-                    <?php if (!empty($_GET['error'])) { ?>
+                    <?php if(isset($_GET['error'])) { ?>
                         <div class="alert alert-danger alert-styled-left">Register Error</div>
                     <?php } ?> 
                     <h1 class="extra_style">Create your account</h1>
                     <input id="name" type="text" name="name" placeholder="Name"/>
                     <input id="email" type="email" name="email" placeholder="Email"/>
-                    <div class="text-danger email-error">
+                    <!-- <div class="text-danger email-error">
                         Must be a valid email address!
-                    </div>
+                    </div> -->
                     <input id="password" type="password" name="password" placeholder="Password"/>
-                    <div class="text-danger password-error">
+                    <!-- <div class="text-danger password-error">
                         Password must be more than 4 characters!
-                    </div>
-                    <button class="btn" type="submit">Register</button>
+                    </div> -->
+                    <button class="btn" type="submit" name="submit">Register</button>
                     <h2>Already a member?<span style ="font-weight: bold"><a href = "login.php" target= "_blank"> Log in</a></span></h2>
                 </form>
             </div>
@@ -76,7 +77,8 @@ use Hotel\User;
     <footer>
         <p> &copy; ΔΙΠΑΕ 2021</p>
      </footer>
-     <script src="js_files/form_validation.js"></script>
+     <!-- <script src="js_files/form_validation.js"></script> -->
      <script src="js_files/responsive_navbar.js"></script>
 </body>
 </html>
+

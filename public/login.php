@@ -1,3 +1,7 @@
+<?php
+require __DIR__.'/../boot/boot.php';
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,13 +20,13 @@
       integrity="sha384-Bfad6CLCknfcloXFOyFnlgtENryhrpZCe29RTifKEixXQZ38WheV+i/6YWSzkz3V"
       crossorigin="anonymous"
     />
-    <title>Login Page</title>
+    <title>Login Page | TravelBug</title>
 </head>
 <body>
     <header>
         <nav class="navbar">
             <ul>
-                <li class="navbar-logo">TravelBug</li>
+                <li class="navbar-logo"><a href="index.php">TravelBug</a></li>
                 <li class="navbar-toggle"><i class="fas fa-bars"></i></li>
                 <li class="navbar-links"><a href="index.php">Home</a></li>
                 <li class="navbar-links"><a href="profile.php" target="_blank">Profile</a></li>
@@ -34,9 +38,9 @@
     <main class="parent">
         <div class="container">
             <div class="content-left">
-                <form action="actions/login.php" method="post" class="form">
+                <form method="post" action="actions/login.php" class="form">
                     <h1>Login</h1>
-                    <input id="name" type="text" name="username" placeholder="Username" required/>
+                    <input id="name" type="text" name="name" placeholder="Username" required/>
                     <input id="password" type="password" name="password" placeholder="Password" required/>
                     <input class="cta" type="submit" name="submit" value="LOGIN" />
                     <h2>Not a member?<span style ="font-weight: bold"><a href = "register.php" target= "_blank"> Sign up now</a></span></h2>
@@ -56,4 +60,4 @@
      <script src="js_files/responsive_navbar.js"></script>
 </body>
 </html>
-<?php
+

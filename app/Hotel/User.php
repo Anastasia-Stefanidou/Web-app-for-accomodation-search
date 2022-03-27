@@ -6,8 +6,7 @@ use PDO;
 use Hotel\BaseService;
 use support\configuration\configuration;
 
-class User extends BaseService 
-{
+class User extends BaseService {
     const TOKEN_KEY = 'asfdhkgjlr;ofijhgbfdklfsadf';
 
     private static $currentUserId;
@@ -17,6 +16,13 @@ class User extends BaseService
             ':email' => $email,
         ];
         return $this->fetch('SELECT * FROM USER WHERE email = :email', $parameters);
+    }
+
+    public function getByName($name) {
+        $parameters = [
+            ':name' => $name,
+        ];
+        return $this->fetch('SELECT * FROM USER WHERE name = :name', $parameters);
     }
 
     public function getByUserId($userId) {
@@ -29,6 +35,7 @@ class User extends BaseService
     public function getList() {
         return $this->fetchAll('SELECT * FROM user');
     }
+
     public function insert($name, $email, $password) {
         $passwordHash = password_hash($password, PASSWORD_BCRYPT);
 
@@ -52,6 +59,15 @@ class User extends BaseService
         return password_verify($password, $user['password']);
     }
 
+    public function verifyUser($name, $password) {
+        // Step 1 - Retrieve user
+        $user = $this->getByName($name);
+
+        // Step 2 - Verify user password
+        $rows = password_verify($password, $user['password']);
+        return $rows;
+    }
+
     public function generateToken($userId) {
         $payload = [
             'user_id' => $userId,
@@ -61,7 +77,6 @@ class User extends BaseService
 
         return sprintf('%s.%s', $payloadEncoded, $signature);
     }
-
 
     public function getTokenPayload($token) {
         [$payloadEncoded] = explode('.', $token);
