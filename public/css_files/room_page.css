@@ -22,6 +22,8 @@ body {
 
 footer.margin-top {
     height: 40px;
+    display: flex;
+    margin-top: 10px;
 }
 
 footer p {

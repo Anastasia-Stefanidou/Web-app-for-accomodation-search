@@ -7,7 +7,6 @@ use Hotel\User;
 $user = new User();
 
 $verifiedUser = $user->verifyUser($_REQUEST['name'], $_REQUEST['password']);
-
 if (!$verifiedUser) {
     echo ("<script LANGUAGE='JavaScript'>
     window.alert('Wrong username or password.');

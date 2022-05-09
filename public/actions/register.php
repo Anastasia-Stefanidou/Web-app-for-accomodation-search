@@ -14,9 +14,10 @@ if (strtolower($_SERVER['REQUEST_METHOD']) != 'post') {
 $user = new User();
 
 $checkEmail = $user->checkIfEmailExists($_REQUEST['email']);
+$checkUsername = $user->checkIfNameExists($_REQUEST['name']);
 $passLength = strlen((int) ($_REQUEST['password']));
 
-if (empty($checkEmail)) {
+if (empty($checkEmail) && empty($checkUsername)) {
     if ($passLength > 4) {
         $user->insert($_REQUEST['name'], $_REQUEST['email'], $_REQUEST['password']);
         header('Location: /public/index.php');
@@ -28,7 +29,7 @@ if (empty($checkEmail)) {
     }
 } else {
     echo ("<script LANGUAGE='JavaScript'>
-    window.alert('User already exists!');
+    window.alert('Username/email already exists!');
     window.location.href='../register.php';
     </script>");
 }

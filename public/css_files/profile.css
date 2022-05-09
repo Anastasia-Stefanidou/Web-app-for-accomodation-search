@@ -365,3 +365,9 @@ footer {
 	width: 100%;
 	z-index: 999;
   }
+
+  .error {
+	  color: red;
+	  font-size: 14px;
+	  letter-spacing: 2px;
+  }

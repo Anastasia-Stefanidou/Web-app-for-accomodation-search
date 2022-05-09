@@ -25,6 +25,13 @@ class User extends BaseService {
         return $this->fetch('SELECT email FROM USER WHERE email = :email', $parameters);
     }
 
+    public function checkIfNameExists($name) {
+        $parameters = [
+            ':name' => $name,
+        ];
+        return $this->fetch('SELECT name FROM USER WHERE name = :name', $parameters);
+    }
+
     public function getByName($name) {
         $parameters = [
             ':name' => $name,

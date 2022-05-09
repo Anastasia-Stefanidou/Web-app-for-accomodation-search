@@ -94,7 +94,9 @@ $userBookings = $booking->getByUser($userId);
                                 <?php } ?>
                             </ul>
                         <?php } else { ?>
-                            <h2 class="error">You don't have any reviews.</h2>
+                            <div class="error_page">
+                                <h2 class="error">You don't have any reviews.</h2>
+                            </div>
                         <?php } ?>
                     </div>
                 </div>
@@ -115,7 +117,9 @@ $userBookings = $booking->getByUser($userId);
                             <?php } ?>
                         </ul>
                         <?php } else { ?>
-                        <h2 class="error">You don't have any favorite Hotel.</h2>
+                            <div class="error_page">
+                                <h2 class="error">You don't have any favorite Hotel.</h2>
+                            </div>
                         <?php } ?>
                     </div>
                 </div>
@@ -149,7 +153,9 @@ $userBookings = $booking->getByUser($userId);
                                     <?php } ?>
                                 </ul>
                             <?php } else { ?>
-                                <h2 class="error">You don't have any bookings.</h2>
+                                <div class="error_page">
+                                    <h2 class="error">You don't have any bookings.</h2>
+                                </div>
                             <?php } ?>
                     </div>
                 </div>
