@@ -23,7 +23,20 @@ $selectedTypeId = $_REQUEST['room_type'];
 $checkInDate = $_REQUEST['check_in_date'];
 $checkOutDate = $_REQUEST['check_out_date'];
 
-$allAvailableRooms = $room->search(new DateTime($checkInDate),new DateTime($checkOutDate), $selectedCity, $selectedTypeId, $selectedGuest);
+function function_alert($msg) {
+    echo "<script type='text/javascript'>alert('$msg');</script>";
+}
+
+if($checkInDate > $checkOutDate) {
+    echo ("<script LANGUAGE='JavaScript'>
+    window.alert('Please select valid dates.');
+    window.location.href='index.php';
+    </script>");
+    return;
+} else {
+    $allAvailableRooms = $room->search(new DateTime($checkInDate),new DateTime($checkOutDate), $selectedCity, $selectedTypeId, $selectedGuest);
+}
+// $allAvailableRooms = $room->search(new DateTime($checkInDate),new DateTime($checkOutDate), $selectedCity, $selectedTypeId, $selectedGuest);
 
 // Get current user id
 $userId = User::getCurrentUserId();
@@ -101,7 +114,7 @@ $userId = User::getCurrentUserId();
                 }
               ?>
         </select>
-        <input type="date"  name="check_in_date" id="from" value="<?php echo $checkInDate; ?>" placeholder="Check-in Date" class="cont_item4 cont_item" >
+        <input type="date"  name="check_in_date" id="from" value="<?php echo $checkInDate; ?>" placeholder="Check-in Date" class="cont_item4 cont_item" min="<?php echo date("Y-m-d"); ?>">
         <input type="date" name="check_out_date" id="to" value="<?php echo $checkOutDate; ?>" placeholder="Check-out Date" class="cont_item5 cont_item" min="<?php echo date("Y-m-d"); ?>">
         <input class="cont_item6 cont_item btn" id="submitButton" name="submit" type="submit" value="FIND HOTELS"/>    
     </form>
@@ -123,7 +136,7 @@ $userId = User::getCurrentUserId();
                     <p><?php echo $availableRoom['description_short']; ?></p>
                     <div class="extra">
                         <span class= "extra_item" >Count of Guests: <?php echo $availableRoom['count_of_guests']; ?></span>
-                        <span class= "extra_item">Type of Room: <?php echo $availableRoom['type_id']; ?></span>
+                        <span class= "end extra_item">Type of Room: <?php echo $availableRoom['type_id']; ?></span>
                         <form name="listForm" method="post" action="room.php">
                             <button class="room-page"><a href="room.php?room_id=<?php echo $availableRoom['room_id']; ?>&check_in_date=<?php echo $checkInDate; ?>&check_out_date=<?php echo $checkOutDate; ?>" target="_blank">Go to Room Page</a></button>
                         </form>
@@ -155,7 +168,7 @@ $userId = User::getCurrentUserId();
     </div>
   </main>
   <footer>
-        <p> &copy; ΔΙΠΑΕ 2021</p>
+        <p> &copy; ΔΙΠΑΕ 2022</p>
   </footer>
   <!-- <script src="js_files/search.js"></script> -->
   <a href="https://codepen.io/juliepark"></a>

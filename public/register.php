@@ -46,36 +46,20 @@ use Hotel\User;
         </nav>
     </header>
     <main class="parent">
-        <div class="container">
-            <div class="content-left">
-                <form action="actions/register.php" method="post" class="form">
-                    <?php if(isset($_GET['error'])) { ?>
-                        <div class="alert alert-danger alert-styled-left">Register Error</div>
-                    <?php } ?> 
-                    <h1 class="extra_style">Create your account</h1>
-                    <input id="name" type="text" name="name" placeholder="Name"/>
-                    <input id="email" type="email" name="email" placeholder="Email"/>
-                    <!-- <div class="text-danger email-error">
-                        Must be a valid email address!
-                    </div> -->
-                    <input id="password" type="password" name="password" placeholder="Password"/>
-                    <!-- <div class="text-danger password-error">
-                        Password must be more than 4 characters!
-                    </div> -->
-                    <button class="btn" type="submit" name="submit">Register</button>
-                    <h2>Already a member?<span style ="font-weight: bold"><a href = "login.php" target= "_blank"> Log in</a></span></h2>
-                </form>
-            </div>
-            <div class="content-right">
-                <div class="img">
-                    <div class="img_area"></div>
-                    <h2 class="tracking-in-expand">Your first<br>step to<br>creating<br>new<br>memories!</h2>
-                </div>
-            </div>
-        </div>
+        <form action="actions/register.php" method="post" class="registerForm form">
+            <?php if(isset($_GET['error'])) { ?>
+                <div class="alert alert-danger alert-styled-left">Register Error</div>
+            <?php } ?> 
+            <h1 class="extra_style">Create your account</h1>
+            <input id="name" type="text" name="name" placeholder="Name" required/>
+            <input id="email" type="email" name="email" placeholder="Email" required/>
+            <input id="password" type="password" name="password" placeholder="Password" required/>
+            <button class="btn" type="submit" name="submit">Register</button>
+            <h2>Already a member?<span style ="font-weight: bold"><a href = "login.php" target= "_blank"> Log in</a></span></h2>
+        </form>
     </main>
     <footer>
-        <p> &copy; ΔΙΠΑΕ 2021</p>
+        <p> &copy; ΔΙΠΑΕ 2022</p>
      </footer>
      <!-- <script src="js_files/form_validation.js"></script> -->
      <script src="js_files/responsive_navbar.js"></script>

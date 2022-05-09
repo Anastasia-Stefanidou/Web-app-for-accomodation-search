@@ -35,29 +35,20 @@ require __DIR__.'/../boot/boot.php';
             </ul>
         </nav>
     </header>
-    <main class="parent">
-        <div class="container">
-            <div class="content-left">
-                <form method="post" action="actions/login.php" class="form">
-                    <h1>Login</h1>
-                    <input id="name" type="text" name="name" placeholder="Username" required/>
-                    <input id="password" type="password" name="password" placeholder="Password" required/>
-                    <input class="cta" type="submit" name="submit" value="LOGIN" />
-                    <h2>Not a member?<span style ="font-weight: bold"><a href = "register.php" target= "_blank"> Sign up now</a></span></h2>
-                </form>
-            </div>
-            <div class="content-right">
-                <div class="img">
-                    <div class="img_area"></div>
-                    <h2 class="tracking-in-expand">Your first<br>step to<br>creating<br>new<br>memories!</h2>
-                </div>
-            </div>
-        </div>
+    <main>
+        <form method="post" action="actions/login.php" class="form">
+            <h1>Login</h1>
+            <input id="name" type="text" name="name" placeholder="Username" required/>
+            <input id="password" type="password" name="password" placeholder="Password" required/>
+            <input class="cta" type="submit" name="submit" value="LOGIN" />
+            <h2>Not a member?<span style ="font-weight: bold"><a href = "register.php" target= "_blank"> Sign up now</a></span></h2>
+        </form>
     </main>
     <footer>
-        <p> &copy; ΔΙΠΑΕ 2021</p>
+        <p> &copy; ΔΙΠΑΕ 2022</p>
      </footer>
      <script src="js_files/responsive_navbar.js"></script>
+     <!-- <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> -->
 </body>
 </html>
 

@@ -22,18 +22,30 @@ if (empty($roomId)) {
 }
 
 $roomInfo = $room->get($roomId); 
-if (empty($roomInfo)) {
-    header('Location: index.php');
-    return;
-  }
+// if (empty($roomInfo)) {
+//     header('Location: index.php');
+//     return;
+//   }
 
 // Get current user id
 $userId = User::getCurrentUserId();
 
 $isFavorite = $favorite->isFavorite($roomId, $userId);
 
-$allReviews = $review->getReviewsByRoom($roomId);
+// $allReviews = $review->getReviewsByRoom($roomId);
 $averageReview = $review->averageReview($roomId);
+$numberOfReviews = $review->countReviews($roomId);
+$allReviews = $review->paginationReviews($roomId);
+$is_int = implode($numberOfReviews);
+$results_per_page = 5;
+$number_of_pages = ceil($is_int/$results_per_page);
+// print_r($allReviews);
+
+if (!isset($_GET['page'])) {
+  $page = 1;
+} else {
+  $page = $_GET['page'];
+}
 
 $checkInDate = $_REQUEST['check_in_date'];
 $checkOutDate = $_REQUEST['check_out_date'];
@@ -50,7 +62,7 @@ $roomTitle = $roomInfo['type_id'];
 
 if ($roomTitle == 1) {
   $roomTitle = 'Single Room';
-}elseif ($roomTitle == 2) {
+} elseif ($roomTitle == 2) {
   $roomTitle = 'Double Room';
 } elseif ($roomTitle == 3) {
   $roomTitle = 'Triple Room';
@@ -77,8 +89,45 @@ $userInfo = $booking->UserBookingInfo($roomId, $userId);
     <link rel="stylesheet" href="css_files/basic_styles.css" />
     <!-- <link rel="stylesheet" href= "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css" integrity="sha384-Bfad6CLCknfcloXFOyFnlgtENryhrpZCe29RTifKEixXQZ38WheV+i/6YWSzkz3V" crossorigin="anonymous" /> -->
-    <script src="js_files/popup.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <title><?php echo $roomInfo['name'] ;?> | TravelBug</title>
+    <script>
+        window.onload = function () {
+          var modal = document.getElementById("myModal"),
+          modal1 = document.getElementById("myModal1")
+          btn = document.getElementById("myBtn"),
+          btn1 = document.getElementById("myBtn1"),
+          closeBtn = document.getElementById("closeMap"),
+          closeBtn1 = document.getElementById("closeBtn");
+
+          btn.onclick = function () {
+            modal.style.display = "block";
+          }
+
+          closeBtn.onclick = function() {
+            modal.style.display = "none";
+          }
+
+          if (btn1 != null) {
+              btn1.onclick = function () {
+              modal1.style.display = "block";
+            }
+            
+            closeBtn1.onclick = function() {
+              modal1.style.display = "none";
+            }
+          }
+
+          var selectedImg = document.getElementById('selected_img');
+          var images = document.getElementById('image_list').getElementsByTagName('li');
+          for (i = 0; i < images.length; i++) {
+              images[i].addEventListener('click', activateImage);
+          }
+          function activateImage() {
+              selectedImg.innerHTML = this.innerHTML;
+          }
+        }
+    </script>
   </head>
   <body>
     <header>
@@ -124,7 +173,7 @@ $userInfo = $booking->UserBookingInfo($roomId, $userId);
                   <img src="/../extra/images/<?php echo $roomInfo['photo_url']; ?>" alt="<?php echo $roomInfo['name'] ;?>">
               </div>
               <ul id="image_list">
-                  <li><img src="/../extra/images/<?php echo $roomInfo['photo_url1']; ?>" alt="<?php echo $roomInfo['name'] ;?>"></li>
+                  <!-- <li><img src="/../extra/images/<?php echo $roomInfo['photo_url1']; ?>" alt="<?php echo $roomInfo['name'] ;?>"></li> -->
                   <li><img src="/../extra/images/<?php echo $roomInfo['photo_url2']; ?>" alt="<?php echo $roomInfo['name'] ;?>"></li>
                   <li><img src="/../extra/images/<?php echo $roomInfo['photo_url3']; ?>" alt="<?php echo $roomInfo['name'] ;?>"></li>
                   <li><img src="/../extra/images/<?php echo $roomInfo['photo_url4']; ?>" alt="<?php echo $roomInfo['name'] ;?>"></li>
@@ -132,14 +181,12 @@ $userInfo = $booking->UserBookingInfo($roomId, $userId);
               </ul>
           </div>  
             <div class="description">
-              <div class="room_title">
-              </div>
               <div class= "popup">
                 <i class="fa fa-map-marker"></i> <h1 button id="myBtn">Excellent location - Show map</h1>
                 <div id="myModal" class="modal">
                   <div class="modal-content">
-                      <p class="close">&times;</p>
-                      <iframe src="https://maps.google.com/maps?q=<?php echo $roomInfo['location_lat'] ?>, <?php echo $roomInfo['location_long'] ?>&output=embed" frameborder="0" style="border:0"></iframe>
+                    <iframe class="map"  src="https://maps.google.com/maps?q=<?php echo $roomInfo['location_lat'] ?>, <?php echo $roomInfo['location_long'] ?>&output=embed" frameborder="0" style="border:0"></iframe>
+                    <button type="button" id="closeMap" class="close">×</button>
                   </div>
               </div>
               </div>
@@ -208,17 +255,16 @@ $userInfo = $booking->UserBookingInfo($roomId, $userId);
                   <button id="myBtn1"><i class="fa fa-pencil"></i>POST REVIEW</button>
                   <div id="myModal1" class="modal">
                     <div class="modal-content1">
-                      <span class="close1">&times;</span>
+                    <button type="button" id="closeBtn" class="close1">×</button>
                       <?php
                         if ($userId) {
                       ?>
                         <div class="insertReview">
-                        <h1>Your review</h1>
                         <form method="POST" class="reviewForm" onsubmit="return saveRatings(this);">
                           <input type="hidden" name="room_id" value="<?php echo $roomId ?>">
                           <input type="hidden" name="user_id" value="<?php echo $userId ?>">
                           <p><div class="starrr"></div></p>
-                          <textarea name= "comment" id= "comment" placeholder = "Your review..." value="<?php echo $comment ?>"></textarea>
+                          <textarea name= "comment" id= "comment" placeholder = "Describe your experience..." value="<?php echo $comment ?>"></textarea>
                           <input type="submit" id="review">
                         </form>
                         <div class="rate"></div>
@@ -257,15 +303,24 @@ $userInfo = $booking->UserBookingInfo($roomId, $userId);
                         }
                       ?>
                     </div>
-                    <p><span><?php echo $roomInfo['count_reviews'] ?></span> reviews</p> 
+                    <?php if($roomInfo['count_reviews'] == 1 ) {
+                    ?>
+                      <p><span><?php echo $roomInfo['count_reviews'] ?></span> review</p>
+                    <?php
+                      } else {
+                    ?>
+                      <p><span><?php echo $roomInfo['count_reviews'] ?></span> reviews</p>
+                    <?php
+                      }
+                    ?>
                   </div>
               </div>
                   <div class="reviews">
                     <?php
-                      foreach ($allReviews as $counter => $review) {
+                      foreach ($allReviews as $review) {
                     ?>
                       <div class="content_left">
-                        <span><?php echo sprintf ('%d. %s', $counter + 1, $review['user_name']); ?></span>
+                        <span><?php echo sprintf ($review['user_name']); ?></span>
                         <h5><?php echo $review['created_time']; ?></h5>
                       </div>
                       <div class="content_right">
@@ -289,16 +344,29 @@ $userInfo = $booking->UserBookingInfo($roomId, $userId);
                       }
                     ?>
                     </div>
+                    <nav aria-label="...">
+                      <ul class="pagination">
+                        <?php
+                        for($page = 1; $page<=$number_of_pages; $page++) {
+                          ?>
+                          <li class="page-item">
+                            <a href="room.php?room_id=<?php echo $roomId; ?>&page=<?php echo $page; ?>&check_in_date=<?php echo $checkInDate; ?>&check_out_date=<?php echo $checkOutDate; ?>" target="_blank"><?php echo $page ?></a>
+                          </li>
+                        <?php 
+                          }
+                        ?>
+                      </ul>
+                    </nav>
                   </div>
               <?php 
                   } else { 
                 ?>
-                <span>This room has no reviews yet.</span>
+                <span class="no_reviews">This room has no reviews yet.</span>
                 <?php
                     }
                 ?>  
             </div>
-          </div>          
+          </div>        
       <script>
         var rate = 0;
         $(function () {
@@ -323,6 +391,7 @@ $userInfo = $booking->UserBookingInfo($roomId, $userId);
                 },
                 success: function (response) {
                     alert(response);
+                    window.close();
                     // $('.modal-content1').html(response);
                 }
             });
@@ -331,9 +400,10 @@ $userInfo = $booking->UserBookingInfo($roomId, $userId);
     </script>
     </main>
     <footer class="margin-top">
-        <p> &copy; ΔΙΠΑΕ 2021</p>
+        <p> &copy; ΔΙΠΑΕ 2022</p>
     </footer>
-  <script src="js_files/responsive_navbar.js"></script>
+    <script src="js_files/responsive_navbar.js"></script>
+    <!-- <script src="js_files/popup.js"></script> -->
   </body>
 </html>
 

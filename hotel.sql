@@ -17,20 +17,17 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8mb4 */;
 
---
--- Database: `hotel`
---
-CREATE DATABASE IF NOT EXISTS `hotel` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-USE `hotel`;
 
+
+CREATE DATABASE IF NOT EXISTS `hotel` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 -- --------------------------------------------------------
 
 --
 -- Table structure for table `booking`
 --
 
-DROP TABLE IF EXISTS `booking`;
-CREATE TABLE IF NOT EXISTS `booking` (
+-- DROP TABLE IF EXISTS `booking`;
+CREATE TABLE `booking` (
   `booking_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `user_id` int(10) UNSIGNED NOT NULL,
   `room_id` int(10) UNSIGNED NOT NULL,
@@ -50,8 +47,8 @@ CREATE TABLE IF NOT EXISTS `booking` (
 -- Table structure for table `favorite`
 --
 
-DROP TABLE IF EXISTS `favorite`;
-CREATE TABLE IF NOT EXISTS `favorite` (
+-- DROP TABLE IF EXISTS `favorite`;
+CREATE TABLE `favorite` (
   `user_id` int(10) UNSIGNED NOT NULL,
   `room_id` int(10) UNSIGNED NOT NULL,
   `created_time` timestamp NOT NULL DEFAULT current_timestamp(),
@@ -66,8 +63,8 @@ CREATE TABLE IF NOT EXISTS `favorite` (
 -- Table structure for table `review`
 --
 
-DROP TABLE IF EXISTS `review`;
-CREATE TABLE IF NOT EXISTS `review` (
+-- DROP TABLE IF EXISTS `review`;
+CREATE TABLE `review` (
   `review_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `room_id` int(10) UNSIGNED NOT NULL,
   `user_id` int(10) UNSIGNED DEFAULT NULL,
@@ -86,8 +83,8 @@ CREATE TABLE IF NOT EXISTS `review` (
 -- Table structure for table `room`
 --
 
-DROP TABLE IF EXISTS `room`;
-CREATE TABLE IF NOT EXISTS `room` (
+-- DROP TABLE IF EXISTS `room`;
+CREATE TABLE `room` (
   `room_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `type_id` int(10) UNSIGNED NOT NULL,
   `name` varchar(250) CHARACTER SET utf32 COLLATE utf32_unicode_ci NOT NULL,
@@ -134,8 +131,8 @@ INSERT INTO `room` (`room_id`, `type_id`, `name`, `city`, `area`, `photo_url`, `
 -- Table structure for table `room_type`
 --
 
-DROP TABLE IF EXISTS `room_type`;
-CREATE TABLE IF NOT EXISTS `room_type` (
+-- DROP TABLE IF EXISTS `room_type`;
+CREATE TABLE `room_type` (
   `type_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `title` varchar(250) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`type_id`)
@@ -157,8 +154,8 @@ INSERT INTO `room_type` (`type_id`, `title`) VALUES
 -- Table structure for table `user`
 --
 
-DROP TABLE IF EXISTS `user`;
-CREATE TABLE IF NOT EXISTS `user` (
+-- DROP TABLE IF EXISTS `user`;
+CREATE TABLE `user` (
   `user_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `name` varchar(250) COLLATE utf8_unicode_ci NOT NULL,
   `email` varchar(250) COLLATE utf8_unicode_ci NOT NULL,
@@ -183,30 +180,30 @@ INSERT INTO `user` (`user_id`, `name`, `email`, `password`, `created_time`, `upd
 --
 -- Constraints for table `booking`
 --
-ALTER TABLE `booking`
-  ADD CONSTRAINT `fk_booking__room` FOREIGN KEY (`room_id`) REFERENCES `room` (`room_id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_booking__user` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+-- ALTER TABLE `booking`
+--   ADD CONSTRAINT `fk_booking__room` FOREIGN KEY (`room_id`) REFERENCES `room` (`room_id`) ON UPDATE CASCADE,
+--   ADD CONSTRAINT `fk_booking__user` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `favorite`
 --
-ALTER TABLE `favorite`
-  ADD CONSTRAINT `fk_favorite__room` FOREIGN KEY (`room_id`) REFERENCES `room` (`room_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_favorite__user` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+-- ALTER TABLE `favorite`
+--   ADD CONSTRAINT `fk_favorite__room` FOREIGN KEY (`room_id`) REFERENCES `room` (`room_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+--   ADD CONSTRAINT `fk_favorite__user` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `review`
 --
-ALTER TABLE `review`
-  ADD CONSTRAINT `fk_review__room` FOREIGN KEY (`room_id`) REFERENCES `room` (`room_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_review__user` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE SET NULL ON UPDATE CASCADE;
+-- ALTER TABLE `review`
+--   ADD CONSTRAINT `fk_review__room` FOREIGN KEY (`room_id`) REFERENCES `room` (`room_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+--   ADD CONSTRAINT `fk_review__user` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 --
 -- Constraints for table `room`
 --
-ALTER TABLE `room`
-  ADD CONSTRAINT `fk_room__room_type` FOREIGN KEY (`type_id`) REFERENCES `room_type` (`type_id`) ON UPDATE CASCADE;
-COMMIT;
+-- ALTER TABLE `room`
+--   ADD CONSTRAINT `fk_room__room_type` FOREIGN KEY (`type_id`) REFERENCES `room_type` (`type_id`) ON UPDATE CASCADE;
+-- COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

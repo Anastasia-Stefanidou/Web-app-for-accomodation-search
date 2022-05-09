@@ -6,6 +6,13 @@
     box-sizing: border-box;
 }
 
+body {
+    background: url("/../extra/images/backPhoto.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
 .container {
     display: flex;
     flex-direction: column;
@@ -31,9 +38,9 @@ footer p {
     width: 100%;
     display: flex;
     /* background-color: rgb(240, 102, 48); */
-    padding: 5px;
+    padding: 0 5px;
     color: #fff;
-    align-items: center;
+    align-items: baseline;
     background-color: #f94327;
     background-image: linear-gradient(316deg, #f94327 0%, #ff7d14 74%);
 }
@@ -185,15 +192,11 @@ footer p {
     height: 20px;
     /* border: 1px solid #F0F0F0;
     border-radius: 2px; */
-    background-color: gainsboro;
+    background-color: #ff7d14;
 }
 
 .selected {
     color: #d65076;
-}
-
-.insert_review {
-    width: 30%;
 }
 
 .first_box {
@@ -216,29 +219,6 @@ footer p {
 
 .room_title h4 {
     font-size: 20px;
-}
-
-@media screen and (max-width: 800px) {
-    .title {
-        flex-wrap: wrap;
-    }
-
-    .amenities {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .amenities p {
-        border-bottom: 2px dotted #fff;
-        width: 100%;
-        text-align: center;
-    }
-
-    .room_info img {
-        width: 100%;
-    }
 }
 
 .room_reviews {
@@ -287,19 +267,23 @@ footer p {
     overflow: auto; /* Enable scroll if needed */
     background-color: rgb(0,0,0); /* Fallback color */
     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-  }
+}
   
-  .modal-content,
-  .modal-content1 {
+  .modal-content {
     background-color: #fefefe;
     margin: 15% auto; 
     padding: 20px;
     border: 1px solid #888;
-    width: 70%; 
+    width: 60%;
+    height: 50%;
   }
 
   .modal-content1 {
-    width: 37%;
+    background-color: #ffffff;
+    width: 35%;
+    height: 35%;
+    margin: 15% auto;
+    padding: 20px;
   }
   
   .close,
@@ -340,8 +324,8 @@ footer p {
   }
 
   .modal-content iframe {
-      width: 90%;
-      height: 400px;
+      width: 100%;
+      height: 100%;
   }
 
   .first_btn {
@@ -354,20 +338,26 @@ footer p {
   }
 
 .starrr {
-    display: inline-block;
+    /* display: inline-block; */
+    display: flex;
+    justify-content: center;
  }
+
 .starrr a {
-    font-size: 20px;
+    font-size: 28px;
     padding: 0 1px;
     cursor: pointer;
     color: rgb(255, 152, 0);
     text-decoration: none;
  }
 
+ .starrr a:hover {
+    color: rgb(255, 152, 0);
+    text-decoration: none; 
+ }
+
  .average_reviews {
      display: flex;
-     /* justify-content: space-around; */
-     /* width: 350px; */
      width: 70%;
      justify-content: space-evenly;
      align-items: baseline;
@@ -375,14 +365,14 @@ footer p {
 
  .review_title {
      display: flex;
-     justify-content: space-around;
+     flex-wrap: wrap;
  }
 
  #myBtn1 {
     background-color: #d9d9d9;
     background-image: linear-gradient(315deg, #d9d9d9 0%, #f6f2f2 74%);
-    position: absolute;
-    margin-left: -50px;
+    /* position: absolute;
+    margin-left: -50px; */
     box-shadow: 0 2px 5px 0 rgba(0,0,0,.26);
     padding: 5px;
     border: none;
@@ -417,29 +407,23 @@ footer p {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    height: 200px;
-}
-
-.insertReview {
-    width: 450px;
-}
-
-.insertReview h1 {
-    font-size: 16px;
+    align-items: center;
 }
 
 #review {
     background-color: rgb(240, 102, 48);
     align-self: center;
-    padding: 5px;
+    padding: 7px;
     border: none;
     color: white;
     box-shadow: 0 2px 5px 0 rgba(0,0,0,.26);
     margin-top: 10px;
+    width: 40%;
 }
 
 #comment {
-    height: 100px;
+    width: 70%;
+    height: 25%;
 }
 
 .second_container {
@@ -458,17 +442,15 @@ footer p {
 }
 
 .second_container div.firstItem {
-    width: 40%;
-}
-
-.dates p:last-child {
-    margin-left: 75px;
+    width: 50%;
 }
 
 .pay,
 .dates {
     display: flex;
     align-items: center;
+    justify-content: space-between;
+    width: 70%;
 }
 
 .reviews {
@@ -485,7 +467,8 @@ footer p {
 
  #selected_img img {
 	width: 100%;
-	height: 330px;
+	/* height: 330px; */
+    height: auto;
  }
 
  #image_list {
@@ -521,14 +504,184 @@ footer p {
     margin-bottom: 20px;
 }
 
-.booking_details .dates p {
-    width: 35%;
-}
-
-.booking_details .details {
-    border-right: 1px solid #f94327;
-}
-
 .booking_details .price {
-    width: 35%;
+    width: 45%;
 }
+
+.no_reviews {
+    margin-left: 5px;
+    color: red;
+}
+
+@media screen and (max-width: 1000px) {
+    .container {
+        max-width: calc(100vw - 10%);
+    }
+
+    .modal-content p.close{
+        margin-left: 55%;
+      }
+
+      .insertReview .reviewForm {
+          width: 95%;
+      }
+
+      .reviewForm #comment {
+          width: 85%;
+      }
+}
+
+@media screen and (max-width: 900px) {
+    .container {
+        max-width: calc(100vw - 5%);
+    }
+
+    .modal-content {
+        width: 70%;
+        height: 40%;
+        margin: 30% auto;
+    }
+}
+
+@media screen and (max-width: 850px) {
+    .modal-content1 {
+        height: 22%;
+    }
+}
+
+@media screen and (max-width: 780px) {
+    .first_box {
+        flex-direction: column;
+    }
+
+    .firstItem {
+        margin-bottom: 30px;
+    }
+
+    .first_box .image_gallery,
+    .first_box .description {
+        width: 90%;
+    }
+
+    .pay,
+    .dates {
+        width: 100%;
+    }
+
+    .second_container {
+        flex-direction: column;
+    }
+
+    .second_container div.firstItem,
+    .second_container div.reviews {
+        width: 80%;
+    }
+
+    .modal-content p.close{
+        margin-left: 62%;
+      }
+
+      .modal-content1 {
+          width: 50%;
+      }
+}
+
+@media screen and (max-width: 580px) {
+    .first_box .image_gallery,
+    .first_box .description {
+        width: 100%;
+    }
+
+    .title {
+        flex-wrap: wrap;
+    }
+
+    .title h2 {
+        margin-left: 8px;
+    }
+
+    .second_container div.firstItem,
+    .second_container div.reviews {
+        width: 95%;
+    }
+
+    .modal-content1 {
+        width: 70%;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .average_reviews {
+        width: 100%;
+    }
+
+    #selected_img img {
+        height: auto;
+    }
+
+    #image_list li img {
+        height: 70px;
+    }
+
+    .modal-content {
+        width: 90%;
+        height: 60%;
+    }
+
+    .modal-content1 {
+        width: 90%;
+        height: 40%;
+    }
+}
+
+#myModal,
+#myModal1 {
+    display: none;
+}
+
+.modal-content {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: row;
+    padding-right: 10px;
+    padding-left: 10px;
+    justify-content: space-evenly;
+}
+
+.modal-content .close {
+    width: 2%;
+}
+
+.modal-content .map {
+    width: 95%;
+}
+
+.modal-content1 {
+    border-radius: 6px;
+}
+
+.insertReview {
+    width: 95%;
+    height: 100%;
+}
+
+.reviewForm {
+    width: 100%;
+    height: 100%;
+}
+
+.close1 {
+    background-color: #fff;
+    font-size: 22px;
+    border: none;
+}
+
+.fa.fa-star:active,
+.fa.fa-star:visited,
+.fa.fa-star:focus,
+.fa.fa-star:hover,
+.starrr a:focus {
+    color: rgb(255, 152, 0);
+    text-decoration: none;
+}
+

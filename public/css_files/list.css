@@ -6,6 +6,13 @@
     box-sizing: border-box;
 }
 
+body {
+  background: url("/../extra/images/backPhoto.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
 main {
     display: flex;
     /* height: 700px; */
@@ -14,6 +21,7 @@ main {
 
 footer {
   height: 40px;
+  background-color: #ffffffab;
 }
 
 .item1 {
@@ -339,65 +347,91 @@ footer {
     }
   }
   
-
+  .fa-map-marker-alt {
+    color: red;
+  }
 /* MEDIA QUERIES */
+@media screen and (max-width: 1400px) {
+  .item1 {
+    width: 30%;
+  }
+  .item2 {
+    width: 70%;
+  }
+}
 
-@media screen and (max-width: 992px) {
-    main {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        padding: 10px;
-    }
-
-    .container2, .container1  {
-        width: 80%;
-        margin-top: 10px;
-    }
-
-    .container2 .title {
-        width: 100%;
-    }
-
-    .media {
-        justify-content: space-between
-    }
-
-    .media span {
-        white-space: nowrap;
-    }
+@media screen and (max-width: 900px) {
+  main {
+    flex-direction: column;
+    align-items: center;
+  }
+  .item1,
+  .item2 {
+    width: calc(100vw - 30%);
+    margin-top: 15px;
   }
 
-  @media screen and (max-width: 730px) {
-      .hotel {
-          display: flex;
-          flex-direction: column;
-      }
+  .item2 div.hotel ,
+  .item2 h2.title {
+    width: 100%;
+  }
 
-      .media, .info {
-          width: 100%;
-      }
-
-      .media img,
-      .media span {
-          width: 70%;
-      }
+  .media {
+    width: 30%;
+  }
+  .info {
+    width: 70%;
+  }
 }
 
-@media screen and (max-width: 440px) {
-    .extra {
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-        align-items: center;
-    }
-
-    .extra .room-page {
-        align-self: center;
-    }
+@media screen and (max-width: 730px) {
+  .item1,
+  .item2 {
+    width: calc(100vw - 15%);
+  }
 }
 
-.fa-map-marker-alt {
-  color: red;
+@media screen and (max-width: 600px) {
+  .hotel {
+    flex-direction: column;
+  }
+
+  .media {
+    width: 50%;
+  }
+  .info {
+    width: 100%;
+  }
 }
+
+@media screen and (max-width: 450px) {
+  .info h2 {
+    font-size: 16px;
+  }
+  .info h3 {
+    font-size: 14px;
+    margin-bottom: 5px;
+  }
+  .info p {
+    font-size: 12px;
+  }
+  .media {
+    width: 70%;
+  }
+  .extra {
+    flex-wrap: wrap;
+    margin-top: 5px;
+  }
+  .extra_item {
+    flex: 1 1 40%;
+  }
+  .end {
+    text-align: end;
+  }
+  .extra form {
+    margin-top: 5px;
+    margin-left: auto;
+  }
+}
+
 

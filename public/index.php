@@ -60,36 +60,46 @@ $userId = User::getCurrentUserId();
           </nav>
       </header>
     <main>
-        <form class="container" name = "searchForm" action="list.php" method="GET">
-            <select class="item item1" name="city" id="city" data-placeholder="City">
-                <option value="" disabled selected hidden>City</option>
-                <?php
-                    foreach ($cities as $city) {
-                  ?>
-                    <option value="<?php echo $city; ?>"><?php echo $city; ?></option>
-                  <?php
-                    }
-                  ?>
-             </select>
-             <select class="item item2" name="room_type" id="RoomType" data-placeholder="Room Type">
-                <option value="" disabled selected hidden>Room Type</option>
-                <?php
-                   foreach ($allTypes as $roomType) {
-                 ?>
-                   <option value="<?php echo $roomType['type_id']; ?>"><?php echo $roomType['title']; ?></option>
-                <?php
-                  }
-                ?>
-              </select>
-              <input class="item item3" type="date"  name="check_in_date" id="from" placeholder="Check-in Date" min="<?php echo date("Y-m-d"); ?>">
-              <input class="item item4" type="date" name="check_out_date" id="to" placeholder="Check-out Date" min="<?php echo date("Y-m-d"); ?>">
-              <div class="search_btn">
-                  <input id="submitButton" type="submit" value="Search"/>
-              </div>
-        </form>
+        <div class="description">
+            <h1>EXPLORE NEW PLACES</h1>
+            <h2>FIND YOUR <span>BEST HOTEL</span></h2>
+        </div>
+        <div class="search">
+          <form class="container" name = "searchForm" action="list.php" method="GET">
+            <div class="firstBox">
+              <select class="item item1" name="city" id="city" data-placeholder="City">
+                    <option value="" disabled selected hidden>City</option>
+                    <?php
+                        foreach ($cities as $city) {
+                      ?>
+                        <option value="<?php echo $city; ?>"><?php echo $city; ?></option>
+                      <?php
+                        }
+                      ?>
+                </select>
+                <select class="item item2" name="room_type" id="RoomType" data-placeholder="Room Type">
+                    <option value="" disabled selected hidden>Room Type</option>
+                    <?php
+                      foreach ($allTypes as $roomType) {
+                    ?>
+                      <option value="<?php echo $roomType['type_id']; ?>"><?php echo $roomType['title']; ?></option>
+                    <?php
+                      }
+                    ?>
+                </select>
+            </div>
+            <div class="secondBox">
+                <input class="item item3" type="date"  name="check_in_date" id="from" placeholder="Check-in Date" min="<?php echo date("Y-m-d"); ?>">
+                <input class="item item4" type="date" name="check_out_date" id="to" placeholder="Check-out Date" min="<?php echo date("Y-m-d"); ?>">
+            </div>
+            <div class="search_btn">
+                <input id="submitButton" type="submit" value="SEARCH"/>
+            </div>
+          </form>
+        </div>
     </main>
     <footer>
-          <p> &copy; ΔΙΠΑΕ 2021</p>
+          <p> &copy; ΔΙΠΑΕ 2022</p>
     </footer>
     <script src="js_files/responsive_navbar.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>

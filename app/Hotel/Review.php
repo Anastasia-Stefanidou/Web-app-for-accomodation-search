@@ -11,7 +11,7 @@ class Review extends BaseService
         $parameters = [
             ':user_id' => $userId,
         ];
-        return $this->fetchAll('SELECT review.*, room.name
+        return $this->fetchAll('SELECT review.*, room.name, room.photo_url
         FROM review
         INNER JOIN room ON review.room_id = room.room_id
         WHERE user_id = :user_id', $parameters);
@@ -69,7 +69,34 @@ class Review extends BaseService
             ':room_id' => $roomId,
         ];
         
-        return $this->fetchAll('SELECT review.*, user.name as user_name FROM review INNER JOIN user ON review.user_id = user.user_id WHERE room_id = :room_id ORDER BY created_time ASC' , $parameters);
+        return $this->fetchAll('SELECT review.*, user.name as user_name FROM review INNER JOIN user ON review.user_id = user.user_id WHERE room_id = :room_id ORDER BY created_time DESC LIMIT 0,5' , $parameters);
     }
 
+    public function paginationReviews($roomId) {
+
+        $parameters = [
+            ':room_id' => $roomId,
+        ];
+        
+        $numberOfReviews = $this->fetch('SELECT COUNT(review_id) FROM review WHERE room_id = :room_id', $parameters);
+        $results_per_page = 5;
+        $number_of_pages = ceil($is_int/$results_per_page);
+
+        if (!isset($_GET['page'])) {
+            $page = 1;
+          } else {
+            $page = $_GET['page'];
+          }
+          $page_first_result = ($page-1)*$results_per_page;
+          return $this->fetchAll("SELECT review.*, user.name as user_name FROM review INNER JOIN user ON review.user_id = user.user_id WHERE room_id = :room_id LIMIT " . $page_first_result . ',' . $results_per_page, $parameters);
+
+    }
+
+    public function countReviews($roomId) {
+
+        $parameters = [
+            ':room_id' => $roomId,
+        ];
+        return $this->fetch('SELECT COUNT(review_id) FROM review WHERE room_id = :room_id', $parameters);
+   }
 }

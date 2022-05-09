@@ -4,22 +4,15 @@ require_once __DIR__.'/../../boot/boot.php';
 
 use Hotel\User;
 
-// if (strtolower($_SERVER['REQUEST_METHOD']) != 'post') {
-//     header('Location: /');
-
-//     return;
-// }
-function function_alert($msg) {
-    echo "<script type='text/javascript'>alert('$msg');</script>";
-}
-
 $user = new User();
 
 $verifiedUser = $user->verifyUser($_REQUEST['name'], $_REQUEST['password']);
-// print_r($verifiedUser);die;
 
 if (!$verifiedUser) {
-    function_alert("Wrong username or password");
+    echo ("<script LANGUAGE='JavaScript'>
+    window.alert('Wrong username or password.');
+    window.location.href='../login.php';
+    </script>");
 } else {
     $userInfo = $user->getByName($_REQUEST['name']);
     // Generate Token
@@ -29,6 +22,4 @@ if (!$verifiedUser) {
     header('Location: ../profile.php');
 }
 
-//Return to home page
-// header('Location: /public/index.php');
 ?>

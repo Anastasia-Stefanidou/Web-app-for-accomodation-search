@@ -11,32 +11,13 @@ class Booking extends BaseService {
         $parameters = [
             ':user_id' => $userId,
         ];
+
         return $this->fetchAll('SELECT booking.*, room.name, room.city, room.area, room.description_short, room.photo_url, room_type.title as room_type
         FROM booking
         INNER JOIN room ON booking.room_id = room.room_id
         INNER JOIN room_type ON room.type_id = room_type.type_id
         WHERE user_id = :user_id', $parameters);
     }
-
-    // public function getroomId($userId) {
-    //     $parameters = [
-    //         ':user_id' => $userId,
-    //     ];
-    //     return $this->fetchAll('SELECT room.room_id
-    //     FROM room
-    //     INNER JOIN booking ON booking.room_id = room.room_id
-    //     WHERE user_id = :user_id', $parameters);
-    // }
-
-    // public function getBookingId($roomId) {
-    //     $parameters = [
-    //         ':room_id' => $roomId,
-    //     ];
-    //     return $this->fetchAll('SELECT booking.booking_id
-    //     FROM booking
-    //     INNER JOIN payment ON booking.booking_id = payment.booking_id
-    //     WHERE room_id = :room_id', $parameters);
-    // }
 
     public function bookingDetails($roomId, $userId, $checkInDate, $checkOutDate) {
         $this->getPdo()->beginTransaction();

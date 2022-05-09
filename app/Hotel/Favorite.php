@@ -11,7 +11,7 @@ class Favorite extends BaseService {
         $parameters = [
             ':user_id' => $userId,
         ];
-        return $this->fetchAll('SELECT favorite.*, room.name
+        return $this->fetchAll('SELECT favorite.*, room.name, room.photo_url
         FROM favorite
         INNER JOIN room ON favorite.room_id = room.room_id
         WHERE user_id = :user_id', $parameters);

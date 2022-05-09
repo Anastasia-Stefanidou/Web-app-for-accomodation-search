@@ -7,27 +7,16 @@
     font-family: 'Poppins', sans-serif;
 }
 
-.container {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    width: 50%;
-    height: 500px;
-    margin: 0;
-    padding: 0;
+body {
+    background: url("/../extra/images/index/sounio2.jpeg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
-.parent {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: calc(100vh - 70px);
-}
-
-form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.navbar ul li a,
+.navbar-toggle {
+    color: #fff;
 }
 
 footer {
@@ -38,156 +27,77 @@ footer p {
     margin-bottom: 0;
 }
 
-input, .btn {
-    padding: 10px;
-    background-color: #fff;
-    margin: 10px;
-    width: 100%;
-    text-align: center;
-    border: none;
-    border-bottom: 1px solid #AAA;
-    transition: 0.3s ease;
+main {
+    min-height: calc(100vh - 70px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-input[type="submit"], .btn {
-    width: 50%;
+.form {
+    width: 35%;
+    height: 320px;
+    background-color: #ffffffab;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+#name,
+#password,
+.cta,
+#email,
+.btn {
+    padding: 7px;
+    width: 55%;
+}
+
+.cta,
+.btn {
     background-color: rgb(240, 102, 48);
-    color: white;
+    color: #fff;
+    border: none;
 }
 
-h2 {
-    font-size: 14px;
-    text-align: center;
-    margin: 3px;
-    line-height: 2;
-    color: #494949;
-    letter-spacing: 2px;
-}
-
-h2 a {
-    text-decoration: none;
-    color: rgb(240, 102, 48);
-}
-
-h2 a:hover {
-    text-decoration: none;
-}
-
-h1 {
-    text-transform: uppercase;
-    color: #494949;
-    font-weight: 200;
-    text-align: center;
-    font-size: 35px;
-    margin-top: 5px;
+.form h1 {
+    font-weight: 600;
+    font-size: 26px;
+    color: rgb(117 83 68);
     letter-spacing: 5px;
+    text-transform: uppercase;
 }
 
-.extra_style {
-    font-size: 20px;
+.form h2 {
+    font-size: 18px;
+    color: rgb(117 83 68);
 }
 
-.content-left {
-    display: flex;
-    align-items: center;
-    height: 480px;
-    flex-basis: 50%;
-    justify-content: center;
+@media screen and (max-width: 1200px) {
+    .form {
+        width: calc(100vw - 35%);
+    }
 }
 
-.content-right {
-    flex-basis: 50%;
-}
-
-.tracking-in-expand {
-    position: absolute;
-    font-size: 35px;
-}
-
-.img {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color:rgb(13, 13, 14);
-}
-
-.img_area {
-    height: 490px;
-    width: 100%;
-    background: url(/../extra/images/orange.jpg);
-    background-position: center;
-    -webkit-background-size: cover;
-    background-size: cover;
-}
-
-.tracking-in-expand {
-	-webkit-animation: tracking-in-expand 7s cubic-bezier(0.215, 0.610, 0.355, 1.000) both;
-	        animation: tracking-in-expand 7s cubic-bezier(0.215, 0.610, 0.355, 1.000) both;
-}
-
-@-webkit-keyframes tracking-in-expand {
-  0% {
-    letter-spacing: -0.5em;
-    opacity: 0;
-  }
-  40% {
-    opacity: 0.6;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-@keyframes tracking-in-expand {
-  0% {
-    letter-spacing: -0.5em;
-    opacity: 0;
-  }
-  40% {
-    opacity: 0.6;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
-@media screen and (max-width: 600px) {
-    
-    .container {
-        flex-direction: column;
-        width: 100%;
-        justify-content: center;
-        align-items: center;
-        margin-top: 100px;
-        margin-bottom: 60px;
+@media screen and (max-width: 650px) {
+    .form {
+        width: calc(100vw - 10%);
     }
 
-    .tracking-in-expand {
-        margin: 15px 60px;
-        min-width: 400px;
-        height: 250px;
-        font-size: 22px;
+    .registerForm {
+        width: calc(100vw - 5%);
     }
 
-    .content-right {
-        margin: 15px 60px;
-        min-width: 400px;
-        height: 300px;
+    .form .extra_style {
+        font-size: 17px;
     }
 
-    .content-left {
-        width: 50%;
-        height: 50%;
+    #name,
+    #password,
+    .cta,
+    #email {
+        padding: 7px;
+        width: 80%;
     }
-
-    form {
-        margin-bottom: 50px;
-    }
-    .img_area {
-        height: 300px;
-        width: 100%;
-        background: url(/../extra/images/orange.jpg);
-        background-position: center;
-        -webkit-background-size: cover;
-        background-size: cover;
-    }
-  }
+}

@@ -24,6 +24,10 @@ if (empty($roomId)) {
     return;
 }
 
+function function_alert($msg) {
+    echo "<script type='text/javascript'>alert('$msg');</script>";
+}
+
 //Create Booking
 $booking = new Booking();
 $checkInDate = $_REQUEST['check_in_date'];
@@ -36,9 +40,13 @@ $card = $_REQUEST['card'];
 $failed = empty($checkInDate) || empty($checkOutDate) || empty($year) || empty($month) || empty($CVC) || empty($card);
 if (!$failed) {
     $booking->addBooking($roomId, User::getCurrentUserId(), $checkInDate, $checkOutDate);
-    header(sprintf('Location: ../profile.php'));
+    echo ("<script LANGUAGE='JavaScript'>
+    window.alert('Congratulations!Booking confirmed.');
+    window.location.href='../profile.php';
+    </script>");
 } else {
-    echo "<p style='font-size:20px;'>Please fill correctly all fields</p>";
+    function_alert("Please fill correctly all fields.");
+    // echo "<p style='font-size:20px;'>Please fill correctly all fields</p>";
     // echo "Please fill correctly all fields";
 }
 
