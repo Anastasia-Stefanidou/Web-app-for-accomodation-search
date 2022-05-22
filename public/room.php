@@ -7,12 +7,10 @@ use Hotel\User;
 use Hotel\Booking;
 use Hotel\Favorite;
 use Hotel\Review;
-// use Hotel\Payment;
 
 $room = new Room();
 $favorite = new Favorite();
 $review = new Review();
-// $payment = new Payment();
 
 // Check for room id
 $roomId = $_REQUEST['room_id'];
@@ -22,10 +20,6 @@ if (empty($roomId)) {
 }
 
 $roomInfo = $room->get($roomId); 
-// if (empty($roomInfo)) {
-//     header('Location: index.php');
-//     return;
-//   }
 
 // Get current user id
 $userId = User::getCurrentUserId();
